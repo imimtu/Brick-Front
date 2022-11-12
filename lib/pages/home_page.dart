@@ -66,16 +66,40 @@ class _HomePageState extends State<HomePage> {
     DateTime now = DateTime.now();
     String today =
         "${now.year}.${now.month < 10 ? '0${now.month}' : now.month}.${now.day < 10 ? '0${now.day}' : now.day}";
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [Text(today)],
-          )
-        ],
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [Text(today)],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    child: ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Checkbox(
+                          onChanged: (bool? value) {},
+                          value: false,
+                        ),
+                      ),
+                      title: Text("title"),
+                      subtitle: Text("subtitle"),
+                      trailing: Text("trailing"),
+                    ),
+                  );
+                }),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

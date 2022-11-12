@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:brick/pages/pages.dart';
-import 'package:brick/utils/utils.dart';
+import 'package:brick/styles/styles.dart';
 
 void main() {
   runApp(const App());

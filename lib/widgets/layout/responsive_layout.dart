@@ -1,15 +1,14 @@
+import 'package:brick/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveLayout extends StatelessWidget {
   final Widget mobileBody;
   final Widget desktopBody;
-  final double mobileWidth;
 
   const ResponsiveLayout({
     super.key,
     required this.mobileBody,
     required this.desktopBody,
-    required this.mobileWidth,
   });
 
   @override

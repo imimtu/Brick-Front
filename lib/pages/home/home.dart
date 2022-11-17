@@ -1,5 +1,3 @@
-import 'package:brick/pages/home/widgets/home_body.dart';
-import 'package:brick/pages/home/widgets/home_drawer.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -14,8 +12,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      drawer: const HomeDrawer(),
-      body: const HomeBody(),
+      drawer: _drawer(context),
+      body: _body(context),
       floatingActionButton: _floatingButton(context),
     );
   }
@@ -35,6 +33,72 @@ class _HomeState extends State<Home> {
         );
       }),
       title: const Text("Brick"),
+    );
+  }
+
+  Widget _drawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.all(0),
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text("Drawer"),
+          ),
+          ListTile(
+            title: const Text("Menu1"),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text("Menu2"),
+            onTap: () {},
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    DateTime now = DateTime.now();
+    String today =
+        "${now.year}.${now.month < 10 ? '0${now.month}' : now.month}.${now.day < 10 ? '0${now.day}' : now.day}";
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [Text(today)],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    child: ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Checkbox(
+                          onChanged: (bool? value) {},
+                          value: false,
+                        ),
+                      ),
+                      title: const Text("title"),
+                      subtitle: const Text("subtitle"),
+                      trailing: const Text("trailing"),
+                    ),
+                  );
+                }),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 

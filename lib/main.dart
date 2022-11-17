@@ -15,9 +15,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Brick',
-      debugShowCheckedModeBanner: false,
+      home: const Home(),
       theme: basicTheme,
-      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -1,8 +1,10 @@
-import 'package:brick/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
-export 'home_page.dart';
-export 'splash_page.dart';
+import 'package:brick/pages/home/home.dart';
+import 'package:brick/pages/splash/splash.dart';
+
+export 'home/home.dart';
+export 'splash/splash.dart';
 
 enum PATH {
   splash,
@@ -16,9 +18,9 @@ const Map<PATH, String> path = {
 
 Map<String, Widget Function(BuildContext)> routes = {
   path[PATH.splash]!: (context) {
-    return const SplashPage();
+    return const Splash();
   },
   path[PATH.home]!: (context) {
-    return const SizedBox();
+    return const Home();
   },
 };

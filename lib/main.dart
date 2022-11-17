@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:brick/pages/pages.dart';
 import 'package:brick/styles/styles.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const App());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: ((context) => HomeController())),
+    ],
+    child: const App(),
+  ));
 }
 
 class App extends StatelessWidget {

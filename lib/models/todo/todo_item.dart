@@ -2,7 +2,7 @@ import './todo_catergory.dart';
 
 class ToDoItem {
   /// 해당 ToDo의 제목
-  final String title;
+  String title;
 
   /// ToDo의 카테고리
   List<ToDoCategory>? category;
@@ -11,7 +11,7 @@ class ToDoItem {
   String? contents;
 
   /// ToDo의 완료 여부
-  final bool isComplete = false;
+  bool isComplete = false;
 
   // TODO: ToDo 항목별 구분 인자 결정 후 Key 생성 필요
   /// ToDo의 식별 키

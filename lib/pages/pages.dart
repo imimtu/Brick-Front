@@ -4,6 +4,7 @@ import 'package:brick/pages/home/home.dart';
 import 'package:brick/pages/splash/splash.dart';
 
 export 'home/home.dart';
+export 'home/home_controller.dart';
 export 'splash/splash.dart';
 
 enum PATH {

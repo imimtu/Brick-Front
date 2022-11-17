@@ -1,4 +1,7 @@
+import 'package:brick/models/todo/todo_item.dart';
+import 'package:brick/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,7 +17,7 @@ class _HomeState extends State<Home> {
       appBar: _appBar(context),
       drawer: _drawer(context),
       body: _body(context),
-      floatingActionButton: _floatingButton(context),
+      // floatingActionButton: _floatingButton(context),
     );
   }
 
@@ -61,9 +64,8 @@ class _HomeState extends State<Home> {
   }
 
   Widget _body(BuildContext context) {
-    DateTime now = DateTime.now();
-    String today =
-        "${now.year}.${now.month < 10 ? '0${now.month}' : now.month}.${now.day < 10 ? '0${now.day}' : now.day}";
+    TextEditingController textEditingController = TextEditingController();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -71,27 +73,69 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [Text(today)],
+              children: [
+                IconButton(
+                  onPressed: () {
+                    context
+                        .read<HomeController>()
+                        .addItem(title: textEditingController.text);
+                    textEditingController.text = "";
+                  },
+                  icon: const Icon(Icons.add),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: textEditingController,
+                    onSubmitted: (val) {
+                      context.read<HomeController>().addItem(title: val);
+                      textEditingController.text = "";
+                    },
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 20,
+                itemCount: context.watch<HomeController>().toDoList.length,
                 itemBuilder: ((context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                    child: ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Checkbox(
-                          onChanged: (bool? value) {},
-                          value: false,
+                    child: Builder(builder: (context) {
+                      ToDoItem toDoItem = context
+                          .watch<HomeController>()
+                          .toDoList
+                          .itemAt(index);
+                      return ListTile(
+                        leading: Checkbox(
+                          value: toDoItem.isComplete,
+                          onChanged: (val) {
+                            context
+                                .read<HomeController>()
+                                .changeComplteState(index: index, val: val!);
+                          },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
                         ),
-                      ),
-                      title: const Text("title"),
-                      subtitle: const Text("subtitle"),
-                      trailing: const Text("trailing"),
-                    ),
+                        title: Text(
+                          toDoItem.title,
+                          style: toDoItem.isComplete
+                              ? const TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Colors.grey)
+                              : null,
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {
+                            context
+                                .read<HomeController>()
+                                .deleteItem(index: index);
+                          },
+                          icon: const Icon(
+                            Icons.delete,
+                          ),
+                        ),
+                      );
+                    }),
                   );
                 }),
               ),

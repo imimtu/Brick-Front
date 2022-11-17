@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
       appBar: _appBar(context),
       drawer: _drawer(context),
       body: _body(context),
-      // floatingActionButton: _floatingButton(context),
     );
   }
 
@@ -143,15 +142,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    );
-  }
-
-  /// Home - floatingButton
-  Widget _floatingButton(BuildContext context) {
-    return FloatingActionButton(
-      tooltip: 'Additional Button',
-      child: const Icon(Icons.add_task),
-      onPressed: () {},
     );
   }
 }

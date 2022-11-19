@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+
+class ToDoTile extends StatefulWidget {
+  final EdgeInsetsGeometry padding;
+
+  final bool isChecked;
+
+  final Function(bool?)? checkOnChnaged;
+
+  final String title;
+
+  final Function()? onDelete;
+
+  const ToDoTile({
+    super.key,
+    this.padding = const EdgeInsets.all(5),
+    this.isChecked = false,
+    this.checkOnChnaged,
+    required this.title,
+    this.onDelete,
+  });
+
+  @override
+  State<ToDoTile> createState() => _ToDoTileState();
+}
+
+class _ToDoTileState extends State<ToDoTile> {
+  bool checkVal = false;
+
+  @override
+  void setState(VoidCallback fn) {
+    checkVal = widget.isChecked;
+    super.setState(fn);
+  }
+
+  void changeCheckVal(bool val) {
+    setState(() {
+      checkVal = val;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: ((BuildContext ctx, BoxConstraints constraints) {
+        return Container(
+          height: 70,
+          width: constraints.maxWidth,
+          padding: widget.padding,
+          margin: widget.padding,
+          // color: Colors.orange,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: Transform.scale(
+                  scale: 1.3,
+                  child: Checkbox(
+                    value: checkVal,
+                    shape: const CircleBorder(),
+                    onChanged: (val) {
+                      if (val != null) {
+                        changeCheckVal(val);
+
+                        if (widget.checkOnChnaged != null) {
+                          widget.checkOnChnaged!(val);
+                        }
+                      }
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontSize: 18,
+                              decoration:
+                                  checkVal ? TextDecoration.lineThrough : null,
+                              color: checkVal ? Colors.grey : null,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 10,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(width: 1.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: IconButton(
+                  onPressed: widget.onDelete,
+                  icon: const Icon(
+                    Icons.delete,
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}

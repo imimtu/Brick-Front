@@ -1,5 +1,6 @@
 import 'package:brick/models/todo/todo_item.dart';
 import 'package:brick/pages/home/home_controller.dart';
+import 'package:brick/pages/pages.dart';
 import 'package:brick/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
       appBar: _appBar(context),
       drawer: _drawer(context),
       body: _body(context),
+      floatingActionButton: _floatingActionButton(context),
     );
   }
 
@@ -129,6 +131,19 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      tooltip: "To Do 등록",
+      onPressed: () {
+        Navigator.of(context).pushNamed(path[PATH.todo]!);
+      },
+      child: Transform.scale(
+        scale: 1.4,
+        child: const Icon(Icons.add_task_rounded),
       ),
     );
   }

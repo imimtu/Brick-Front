@@ -20,7 +20,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Brick',
-      home: const Home(),
+      // home: const Home(),
+      routes: routes,
       theme: basicTheme,
       debugShowCheckedModeBanner: false,
     );

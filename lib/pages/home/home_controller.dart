@@ -6,10 +6,12 @@ class HomeController with ChangeNotifier, DiagnosticableTreeMixin {
   ToDoList toDoList = ToDoList();
 
   void addItem({required String title, String? contents}) {
-    ToDoItem toDoItem = ToDoItem(title: title, contents: contents);
-    toDoList.insert(toDoItem);
+    if (title != "") {
+      ToDoItem toDoItem = ToDoItem(title: title, contents: contents);
+      toDoList.insert(toDoItem);
 
-    notifyListeners();
+      notifyListeners();
+    }
   }
 
   void deleteItem({required int index}) {

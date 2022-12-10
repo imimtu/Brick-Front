@@ -13,12 +13,32 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late FocusNode homeFocusNode;
+  late TextEditingController textEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    homeFocusNode = FocusNode();
+    textEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    homeFocusNode.dispose();
+    textEditingController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
       drawer: _drawer(context),
       body: _body(context),
+      bottomSheet: _bottomSheet(context),
       floatingActionButton: _floatingActionButton(context),
     );
   }
@@ -66,36 +86,13 @@ class _HomeState extends State<Home> {
   }
 
   Widget _body(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
-
-    return SafeArea(
-      child: Padding(
+    return GestureDetector(
+      onTap: getOffFocus,
+      child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    context
-                        .read<HomeController>()
-                        .addItem(title: textEditingController.text);
-                    textEditingController.text = "";
-                  },
-                  icon: const Icon(Icons.add),
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: textEditingController,
-                    onSubmitted: (val) {
-                      context.read<HomeController>().addItem(title: val);
-                      textEditingController.text = "";
-                    },
-                  ),
-                ),
-              ],
-            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -135,16 +132,41 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _bottomSheet(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      height: homeFocusNode.hasFocus ? 70.0 : 0.0,
+      color: Colors.grey,
+      width: MediaQuery.of(context).size.width,
+      child: TextField(
+        focusNode: homeFocusNode,
+        controller: textEditingController,
+        onSubmitted: (val) {
+          context.read<HomeController>().addItem(title: val);
+          textEditingController.text = "";
+        },
+      ),
+    );
+  }
+
   Widget _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
       tooltip: "To Do 등록",
-      onPressed: () {
-        Navigator.of(context).pushNamed(path[PATH.todo]!);
-      },
+      onPressed: getFocus,
       child: Transform.scale(
         scale: 1.4,
         child: const Icon(Icons.add_task_rounded),
       ),
     );
+  }
+
+  void getFocus() {
+    // TODO(Kangmin): Focus 제거 시 동작 정의
+    homeFocusNode.requestFocus();
+  }
+
+  void getOffFocus() {
+    // TODO(Kangmin): Focus 제거 시 동작 정의
+    homeFocusNode.unfocus();
   }
 }

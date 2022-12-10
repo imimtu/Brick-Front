@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
 
   Widget _body(BuildContext context) {
     return GestureDetector(
-      onTap: getOffFocus,
+      onTap: _getOffFocus,
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -134,17 +134,42 @@ class _HomeState extends State<Home> {
 
   Widget _bottomSheet(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      height: homeFocusNode.hasFocus ? 70.0 : 0.0,
+      padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 8.0),
+      height: homeFocusNode.hasFocus ? 90.0 : 0.0,
       color: Colors.grey,
       width: MediaQuery.of(context).size.width,
-      child: TextField(
-        focusNode: homeFocusNode,
-        controller: textEditingController,
-        onSubmitted: (val) {
-          context.read<HomeController>().addItem(title: val);
-          textEditingController.text = "";
-        },
+      child: Column(
+        children: [
+          Scrollbar(
+            thumbVisibility: true,
+            child: TextField(
+              focusNode: homeFocusNode,
+              controller: textEditingController,
+              maxLines: 1,
+              decoration: const InputDecoration(
+                hintText: "Title",
+                border: InputBorder.none,
+              ),
+              onSubmitted: (val) {
+                _addToDo(val);
+              },
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.calendar_month_outlined,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -152,7 +177,7 @@ class _HomeState extends State<Home> {
   Widget _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
       tooltip: "To Do 등록",
-      onPressed: getFocus,
+      onPressed: _getFocus,
       child: Transform.scale(
         scale: 1.4,
         child: const Icon(Icons.add_task_rounded),
@@ -160,13 +185,20 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void getFocus() {
+  void _getFocus() {
     // TODO(Kangmin): Focus 제거 시 동작 정의
     homeFocusNode.requestFocus();
   }
 
-  void getOffFocus() {
+  void _getOffFocus() {
     // TODO(Kangmin): Focus 제거 시 동작 정의
     homeFocusNode.unfocus();
+
+    _addToDo(textEditingController.text);
+  }
+
+  void _addToDo(String val) {
+    context.read<HomeController>().addItem(title: val);
+    textEditingController.text = "";
   }
 }

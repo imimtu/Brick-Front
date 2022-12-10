@@ -11,6 +11,10 @@ class ToDoTile extends StatefulWidget {
 
   final Function()? onDelete;
 
+  final Function()? swipeOnLeftToRight;
+
+  final Function()? swipeOnRightToLeft;
+
   const ToDoTile({
     super.key,
     this.padding = const EdgeInsets.all(5),
@@ -18,6 +22,8 @@ class ToDoTile extends StatefulWidget {
     this.checkOnChnaged,
     required this.title,
     this.onDelete,
+    this.swipeOnRightToLeft,
+    this.swipeOnLeftToRight,
   });
 
   @override
@@ -43,12 +49,12 @@ class _ToDoTileState extends State<ToDoTile> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: ((BuildContext ctx, BoxConstraints constraints) {
+        // TODO: Swipe Action 처리
         return Container(
           height: 70,
           width: constraints.maxWidth,
           padding: widget.padding,
           margin: widget.padding,
-          // color: Colors.orange,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -84,15 +84,20 @@ class _ToDoTileState extends State<ToDoTile> {
                   children: [
                     Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Text(
-                            widget.title,
-                            style: TextStyle(
-                              fontSize: 18,
-                              decoration:
-                                  checkVal ? TextDecoration.lineThrough : null,
-                              color: checkVal ? Colors.grey : null,
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              widget.title,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: null,
+                              style: TextStyle(
+                                fontSize: 18,
+                                decoration: checkVal
+                                    ? TextDecoration.lineThrough
+                                    : null,
+                                color: checkVal ? Colors.grey : null,
+                              ),
                             ),
                           ),
                         ),

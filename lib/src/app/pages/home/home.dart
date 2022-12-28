@@ -1,7 +1,7 @@
-import 'package:brick/models/todo/todo_item.dart';
-import 'package:brick/pages/home/home_controller.dart';
-import 'package:brick/pages/pages.dart';
-import 'package:brick/widgets/widgets.dart';
+import 'package:brick/src/data/models/todo/todo_item.dart';
+import 'package:brick/src/app/pages/home/home_controller.dart';
+import 'package:brick/src/app/pages/pages.dart';
+import 'package:brick/src/app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

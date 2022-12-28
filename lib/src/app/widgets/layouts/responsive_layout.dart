@@ -1,4 +1,4 @@
-import 'package:brick/styles/styles.dart';
+import 'package:brick/src/app/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveLayout extends StatelessWidget {

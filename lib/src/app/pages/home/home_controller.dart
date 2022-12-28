@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:brick/models/todo/todo.dart';
+import 'package:brick/src/data/models/todo/todo.dart';
 
 class HomeController with ChangeNotifier, DiagnosticableTreeMixin {
   ToDoList toDoList = ToDoList();

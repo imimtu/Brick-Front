@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:brick/pages/home/home.dart';
-import 'package:brick/pages/splash/splash.dart';
-import 'package:brick/pages/todo/todo.dart';
+import 'package:brick/src/app/pages/home/home.dart';
+import 'package:brick/src/app/pages/splash/splash.dart';
+import 'package:brick/src/app/pages/todo/todo.dart';
 
 export 'home/home.dart';
 export 'home/home_controller.dart';

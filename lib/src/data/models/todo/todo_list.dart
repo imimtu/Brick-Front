@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:brick/models/todo/todo_catergory.dart';
+import 'package:brick/src/data/models/todo/todo_catergory.dart';
 
 import './todo_item.dart';
 

@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/release
 
 pubspec.lock
+
+# Draw.io
+*.drawio.bkp
+*.drawio.dtmp

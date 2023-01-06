@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Web Launch Debug",
+            "request": "launch",
+            "args": [
+                // "--web-port=8080",
+                "-d",
+                "chrome"
+            ],
+            "type": "dart",
+            "flutterMode": "debug"
+        },
+        {
+            "name": "Current Device",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart"
+        },
+    ]
+}

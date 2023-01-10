@@ -13,6 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   provider: ^6.0.4
+  just_util:
+    path: ./just_util
 
 dev_dependencies:
   flutter_test:

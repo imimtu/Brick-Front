@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'hashtag.dart';
+import 'package:just_util/just_util.dart';
 
 class Brick {
   /// 해당 ToDo의 제목
@@ -15,8 +16,7 @@ class Brick {
   /// ToDo의 완료 여부
   late bool isComplete;
 
-  // TODO: ToDo 항목별 구분 인자 결정 후 Key 생성 필요
-  /// ToDo의 식별 키
+  /// Brick(ToDo)의 식별 키
   late String _key;
 
   /// ToDo의 Key Private Getter
@@ -34,6 +34,8 @@ class Brick {
     this.isComplete = false,
   }) {
     _createdDate = DateTime.now();
+
+    // TODO: Brick(ToDo) 항목별 구분 인자 결정 후 Key 생성 필요
     _key = "";
   }
 
@@ -66,6 +68,13 @@ class Brick {
   // TODO(Kangmin): toJson 구현
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
+
+    json.setIfPresent(key: 'title', val: title);
+    json.setIfPresent(key: 'hashtags', val: hashtags, defaultVal: []);
+    json.setIfPresent(key: 'contents', val: contents, defaultVal: "");
+    json.setIfPresent(key: 'isComplete', val: isComplete);
+    json.setIfPresent(key: 'key', val: _key);
+    json.setIfPresent(key: 'createdDate', val: _createdDate);
 
     return json;
   }

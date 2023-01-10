@@ -1,0 +1,3 @@
+[submodule "just_util"]
+	path = just_util
+	url = git@github.com:Just-gomin/just_util.git

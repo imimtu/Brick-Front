@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:just_util/just_util.dart';
+
 class User {
   final String name;
 
@@ -13,6 +15,9 @@ class User {
   // TODO(Kangmin): toJson 구현
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
+
+    json.setIfPresent(key: 'name', val: name);
+    json.setIfPresent(key: 'email', val: email);
 
     return json;
   }

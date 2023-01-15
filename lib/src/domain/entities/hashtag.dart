@@ -18,7 +18,12 @@ class HashTag {
 
   HashTag({
     required this.title,
-  });
+  }) {
+    _createdDate = DateTime.now();
+
+    // TODO: HashTag 항목별 구분 인자 결정 후 Key 생성 필요
+    _key = "";
+  }
 
   /// 얕은 복사 함수: key를 제외한 값을 동일하게 복사
   static HashTag copy(HashTag origin) {

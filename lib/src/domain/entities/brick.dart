@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'hashtag.dart';
 import 'package:just_util/just_util.dart';
 
+/// Brick(ToDo) Entity
 class Brick {
   /// 해당 ToDo의 제목
   String title;
@@ -16,16 +17,16 @@ class Brick {
   /// ToDo의 완료 여부
   late bool isComplete;
 
-  /// Brick(ToDo)의 식별 키
+  /// Brick 식별 키
   late String _key;
 
-  /// ToDo의 Key Private Getter
-  String get _getKey => _key;
+  /// Brick Key Private Getter
+  String get key => _key;
 
-  /// ToDo 생성일
+  /// Brick 생성일
   late DateTime _createdDate;
 
-  DateTime get _getCreatedDate => _createdDate;
+  DateTime get createdDate => _createdDate;
 
   Brick({
     required this.title,
@@ -35,34 +36,30 @@ class Brick {
   }) {
     _createdDate = DateTime.now();
 
-    // TODO: Brick(ToDo) 항목별 구분 인자 결정 후 Key 생성 필요
+    // TODO: Brick 항목별 구분 인자 결정 후 Key 생성 필요
     _key = "";
   }
 
-  /// Brick 얕은 복사함수
-  ///
-  /// 제목, 카테고리, 내용만 복사 진행
+  /// 얕은 복사함수: 제목, 카테고리, 내용, 완료여부만 복사 진행
   static Brick copy(Brick origin) {
     return Brick(
       title: origin.title,
       hashtags: origin.hashtags,
       contents: origin.contents,
-    )
-      .._key = origin._getKey
-      .._createdDate = origin._getCreatedDate;
+      isComplete: origin.isComplete,
+    );
   }
 
-  /// Brick 깊은 복사 함수
-  ///
-  /// 모든 값을 동일하게 복사
+  /// 깊은 복사 함수: 모든 값을 동일하게 복사
   static Brick deepCopy(Brick origin) {
     return Brick(
       title: origin.title,
       hashtags: origin.hashtags,
       contents: origin.contents,
+      isComplete: origin.isComplete,
     )
-      .._key = origin._getKey
-      .._createdDate = origin._getCreatedDate;
+      .._key = origin.key
+      .._createdDate = origin.createdDate;
   }
 
   // TODO(Kangmin): toJson 구현

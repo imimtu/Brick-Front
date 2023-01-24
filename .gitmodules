@@ -1,0 +1,3 @@
+[submodule "just_util_dart"]
+	path = just_util_dart
+	url = git@github.com:JustPackages/just_util_dart.git

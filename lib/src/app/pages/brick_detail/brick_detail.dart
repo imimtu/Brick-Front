@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ToDo extends StatelessWidget {
-  const ToDo({super.key});
+class BrickDetail extends StatelessWidget {
+  const BrickDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class ToDo extends StatelessWidget {
 
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
-      title: Text("To Do"),
+      title: const Text("Brick"),
     );
   }
 }

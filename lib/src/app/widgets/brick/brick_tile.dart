@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ToDoTile extends StatefulWidget {
+class BrickTile extends StatefulWidget {
   final EdgeInsetsGeometry padding;
 
   final bool isChecked;
@@ -15,7 +15,7 @@ class ToDoTile extends StatefulWidget {
 
   final Function()? swipeOnRightToLeft;
 
-  const ToDoTile({
+  const BrickTile({
     super.key,
     this.padding = const EdgeInsets.all(5),
     this.isChecked = false,
@@ -27,10 +27,10 @@ class ToDoTile extends StatefulWidget {
   });
 
   @override
-  State<ToDoTile> createState() => _ToDoTileState();
+  State<BrickTile> createState() => _BrickTileState();
 }
 
-class _ToDoTileState extends State<ToDoTile> {
+class _BrickTileState extends State<BrickTile> {
   bool checkVal = false;
 
   @override

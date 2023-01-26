@@ -2,4 +2,4 @@
 export 'layouts/responsive_layout.dart';
 
 // ToDo
-export 'todo/todo_tile.dart';
+export 'brick/brick_tile.dart';

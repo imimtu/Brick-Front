@@ -105,10 +105,10 @@ class _HomeState extends State<Home> {
                             context.watch<HomeController>().brickList[index];
 
                         return BrickTile(
-                          isChecked: brick.isComplete,
+                          isChecked: brick.isCompleted,
                           checkOnChnaged: (val) {
                             if (val != null) {
-                              brick.isComplete = val;
+                              brick.isCompleted = val;
                               // context
                               //     .read<HomeController>()
                               //     .changeComplteState(index: index, val: val);

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:just_util/just_util.dart';
 
+// TODO(kangmin): 해쉬 태그는 추후 고도화 진행시 도입
 class HashTag {
   /// HashTag의 텍스트 값
   String title;

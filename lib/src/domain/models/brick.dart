@@ -9,13 +9,15 @@ class Brick {
   String title;
 
   /// ToDo의 카테고리
-  List<HashTag>? hashtags;
+  List<String>? hashtags;
 
   /// 해당 ToDo의 상세 내용
-  String? contents;
+  String? content;
 
   /// ToDo의 완료 여부
-  late bool isComplete;
+  late bool isCompleted;
+
+  int priority;
 
   /// Brick 식별 키
   late String _key;
@@ -24,42 +26,44 @@ class Brick {
   String get key => _key;
 
   /// Brick 생성일
-  late DateTime _createdDate;
+  late DateTime _createdAt;
 
-  DateTime get createdDate => _createdDate;
+  /// 생성자 (UserID)
+  late String _createdBy;
 
   Brick({
     required this.title,
     this.hashtags,
-    this.contents,
-    this.isComplete = false,
+    this.content,
+    this.isCompleted = false,
+    this.priority = 3,
   }) {
-    _createdDate = DateTime.now();
+    _createdAt = DateTime.now();
 
     // TODO: Brick 항목별 구분 인자 결정 후 Key 생성 필요
     _key = "";
   }
 
   /// 얕은 복사함수: 제목, 카테고리, 내용, 완료여부만 복사 진행
-  static Brick copy(Brick origin) {
+  factory Brick.copy(Brick origin) {
     return Brick(
       title: origin.title,
       hashtags: origin.hashtags,
-      contents: origin.contents,
-      isComplete: origin.isComplete,
+      content: origin.content,
+      isCompleted: origin.isCompleted,
     );
   }
 
   /// 깊은 복사 함수: 모든 값을 동일하게 복사
-  static Brick deepCopy(Brick origin) {
+  factory Brick.deepCopy(Brick origin) {
     return Brick(
       title: origin.title,
       hashtags: origin.hashtags,
-      contents: origin.contents,
-      isComplete: origin.isComplete,
+      content: origin.content,
+      isCompleted: origin.isCompleted,
     )
       .._key = origin.key
-      .._createdDate = origin.createdDate;
+      .._createdAt = origin._createdAt;
   }
 
   // TODO(Kangmin): toJson 구현
@@ -68,10 +72,10 @@ class Brick {
 
     json.setIfPresent(key: 'title', val: title);
     json.setIfPresent(key: 'hashtags', val: hashtags, defaultVal: []);
-    json.setIfPresent(key: 'contents', val: contents, defaultVal: "");
-    json.setIfPresent(key: 'isComplete', val: isComplete);
+    json.setIfPresent(key: 'content', val: content, defaultVal: "");
+    json.setIfPresent(key: 'isCompleted', val: isCompleted);
     json.setIfPresent(key: 'key', val: _key);
-    json.setIfPresent(key: 'createdDate', val: _createdDate);
+    json.setIfPresent(key: 'createdAt', val: _createdAt);
 
     return json;
   }

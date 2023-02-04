@@ -7,7 +7,7 @@ class HomeController with ChangeNotifier, DiagnosticableTreeMixin {
 
   void addItem({required String title, String? contents}) {
     if (title != "") {
-      Brick brick = Brick(title: title, contents: contents);
+      Brick brick = Brick(title: title, content: contents);
       brickList.add(brick);
       notifyListeners();
     }
@@ -19,7 +19,7 @@ class HomeController with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void changeComplteState({required int index, required bool val}) {
-    brickList[index].isComplete = val;
+    brickList[index].isCompleted = val;
     notifyListeners();
   }
 }

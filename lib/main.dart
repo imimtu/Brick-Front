@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:brick/src/app/pages/pages.dart';
-import 'package:brick/src/app/app.dart';
+
 import 'package:provider/provider.dart';
+
+import 'package:brick/src/app/app.dart';
+import 'package:brick/src/app/pages/home/home_controller.dart';
 
 void main() {
   runApp(MultiProvider(

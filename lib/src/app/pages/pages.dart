@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:brick/src/app/pages/home/home.dart';
 import 'package:brick/src/app/pages/splash/splash.dart';
-import 'package:brick/src/app/pages/todo/todo.dart';
+import 'package:brick/src/app/pages/brick_detail/brick_detail.dart';
 
 export 'home/home.dart';
 export 'home/home_controller.dart';
 export 'splash/splash.dart';
-export 'todo/todo.dart';
+export 'brick_detail/brick_detail.dart';
 
 enum PATH {
   splash,
   home,
-  todo,
+  brickDetail,
 }
 
 const Map<PATH, String> path = {
   PATH.splash: "/splash",
   PATH.home: "/",
-  PATH.todo: "/todo",
+  PATH.brickDetail: "/brick",
 };
 
 Map<String, Widget Function(BuildContext)> routes = {
@@ -28,7 +28,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   path[PATH.home]!: (context) {
     return const Home();
   },
-  path[PATH.todo]!: (context) {
-    return const ToDo();
+  path[PATH.brickDetail]!: (context) {
+    return const BrickDetail();
   }
 };

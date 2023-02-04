@@ -1,4 +1,4 @@
-import 'package:brick/src/domain/entities/user.dart';
+import 'package:brick/src/domain/models/user.dart';
 import 'package:brick/src/domain/repositories/user_repository.dart';
 
 class UserRepositoryLocal implements UserRepository {

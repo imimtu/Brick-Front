@@ -1,4 +1,4 @@
-import 'package:brick/src/data/models/todo/todo_item.dart';
+import 'package:brick/src/domain/models/brick.dart';
 import 'package:brick/src/app/pages/home/home_controller.dart';
 import 'package:brick/src/app/pages/pages.dart';
 import 'package:brick/src/app/widgets/widgets.dart';
@@ -97,23 +97,24 @@ class _HomeState extends State<Home> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  itemCount: context.watch<HomeController>().toDoList.length,
+                  itemCount: context.watch<HomeController>().brickList.length,
                   itemBuilder: (context, index) {
                     return Builder(
                       builder: (context) {
-                        ToDoItem toDoItem = context
-                            .watch<HomeController>()
-                            .toDoList
-                            .itemAt(index);
+                        Brick brick =
+                            context.watch<HomeController>().brickList[index];
 
-                        return ToDoTile(
-                          isChecked: toDoItem.isComplete,
+                        return BrickTile(
+                          isChecked: brick.isCompleted,
                           checkOnChnaged: (val) {
-                            context
-                                .read<HomeController>()
-                                .changeComplteState(index: index, val: val!);
+                            if (val != null) {
+                              brick.isCompleted = val;
+                              // context
+                              //     .read<HomeController>()
+                              //     .changeComplteState(index: index, val: val);
+                            }
                           },
-                          title: toDoItem.title,
+                          title: brick.title,
                           onDelete: () {
                             context
                                 .read<HomeController>()
@@ -176,7 +177,7 @@ class _HomeState extends State<Home> {
 
   Widget _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
-      tooltip: "To Do 등록",
+      tooltip: "Brick 등록",
       onPressed: _getFocus,
       child: Transform.scale(
         scale: 1.4,

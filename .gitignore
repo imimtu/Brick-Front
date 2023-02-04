@@ -48,3 +48,6 @@ pubspec.lock
 # Draw.io
 *.drawio.bkp
 *.drawio.dtmp
+
+# ios & MacOS
+**/Podfile.lock

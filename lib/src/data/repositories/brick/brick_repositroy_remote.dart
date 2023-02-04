@@ -1,4 +1,4 @@
-import 'package:brick/src/domain/entities/brick.dart';
+import 'package:brick/src/domain/models/brick.dart';
 import 'package:brick/src/domain/repositories/brick_repository.dart';
 
 class BrickRepositoryRemote implements BrickRepository {

@@ -1,4 +1,4 @@
-import '../entities/entities.dart';
+import '../models/models.dart';
 
 abstract class BrickRepository {
   Future create(Brick brick);

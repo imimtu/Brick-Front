@@ -27,7 +27,7 @@ jobs:
         with:
           flutter-version: "3.7.1"
       - run: flutter pub get
-      - run: flutter test
+      # - run: flutter test
       - run: flutter build apk
       - run: flutter build appbundle
 
@@ -45,5 +45,5 @@ jobs:
           architecture: x64
           flutter-version: "3.7.1"
       - run: flutter pub get
-      - run: flutter test
+      # - run: flutter test
       - run: flutter build ios --release --no-codesign

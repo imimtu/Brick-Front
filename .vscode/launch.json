@@ -1,21 +1,33 @@
 {
     "configurations": [
         {
-            "name": "Web Launch Debug",
+            "name": "Debug Local",
             "request": "launch",
-            "args": [
-                // "--web-port=8080",
-                "-d",
-                "chrome"
-            ],
             "type": "dart",
-            "flutterMode": "debug"
+            "toolArgs": [
+                "--dart-define",
+                "env=local",
+            ],
+            "program": "lib/main.dart"
         },
         {
-            "name": "Current Device",
+            "name": "Debug Develop",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "debug",
+            "toolArgs": [
+                "--dart-define",
+                "env=develop",
+            ],
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "Debug Release",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "env=release",
+            ],
             "program": "lib/main.dart"
         },
     ]

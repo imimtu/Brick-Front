@@ -1,0 +1,3 @@
+enum EnvError {
+  missingFile,
+}

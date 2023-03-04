@@ -51,3 +51,6 @@ pubspec.lock
 
 # ios & MacOS
 **/Podfile.lock
+
+# Environment Variables
+assets/env/**.env

@@ -1,11 +1,11 @@
 import 'package:brick/src/config/error/error_enums.dart';
-import 'package:just_util/just_util.dart';
+import 'package:brick/src/util/brick_logger.dart';
 
 class ErrorMessages {
   static final ErrorMessages _instance = ErrorMessages._internal();
 
   ErrorMessages._internal() {
-    JustLog.log('ErrorMessages Class Created');
+    BrickLogger().info(msg: 'ErrorMessages Class Created');
   }
 
   factory ErrorMessages() {

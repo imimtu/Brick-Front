@@ -1,10 +1,10 @@
 import 'package:brick/src/config/env/env_enums.dart';
 import 'package:brick/src/config/error/error_enums.dart';
 import 'package:brick/src/config/error/error_messages.dart';
+import 'package:brick/src/util/brick_logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:just_util/just_log.dart';
 
 import 'package:provider/provider.dart';
 
@@ -36,7 +36,7 @@ Future<void> setEnv() async {
       env = profile;
     }
 
-    JustLog.log('Env Setting - RunningMode : $env');
+    BrickLogger().info(msg: 'RunningMode : $env', block: 'Env');
 
     // env 파일 로드
     await dotenv.load(fileName: "assets/env/$env.env");

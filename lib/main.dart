@@ -12,6 +12,8 @@ import 'package:brick/src/app/app.dart';
 import 'package:brick/src/app/pages/home/home_controller.dart';
 
 void main() async {
+  setErrorDetector();
+
   await setEnv();
 
   runApp(MultiProvider(
@@ -22,7 +24,19 @@ void main() async {
   ));
 }
 
-///
+/// Set Flutter Error Detecting
+void setErrorDetector() {
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    if (kReleaseMode) {
+      // ToDo(kangmin): 슬랙 API 연결을 통해 상용 모드 에러 리포팅
+      BrickLogger().error(msg: details.exceptionAsString());
+    } else {
+      BrickLogger().error(msg: details.exceptionAsString());
+    }
+  };
+}
+
 /// 환경 변수 setter
 Future<void> setEnv() async {
   try {

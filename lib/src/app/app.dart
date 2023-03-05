@@ -7,6 +7,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    throw Exception('Testing Exception!!!!');
+
     return MaterialApp(
       title: 'Brick',
       routes: routes,

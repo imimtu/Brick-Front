@@ -15,5 +15,4 @@
         "editor.wordBasedSuggestions": false,
     },
     "dart.lineLength": 80,
-    "editor.fontSize": 12,
 }

@@ -11,6 +11,7 @@ class App extends StatelessWidget {
       title: 'Brick',
       routes: routes,
       theme: basicTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
     );
   }

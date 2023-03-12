@@ -10,8 +10,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Brick',
       routes: routes,
-      theme: BrickTheme().basic,
-      darkTheme: BrickTheme().dark,
+      theme: BrickTheme.basic,
+      darkTheme: BrickTheme.dark,
       debugShowCheckedModeBanner: false,
     );
   }

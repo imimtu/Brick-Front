@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BrickDetail extends StatelessWidget {
+  static String path = "/brick";
+
   const BrickDetail({super.key});
 
   @override

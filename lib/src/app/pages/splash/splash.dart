@@ -2,6 +2,8 @@ import 'package:brick/src/app/pages/home/home.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
+  static String path = "/splash";
+
   const Splash({super.key});
 
   @override
@@ -36,18 +38,16 @@ class _SplashState extends State<Splash> {
 
   /// Splash 화면 빌드 후에 동작할 함수
   Future<void> _afterBuild() async {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2, milliseconds: 200), () {
       Navigator.pop(context);
 
       // TODO: 인증 로직 이후 화면 전환
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            fullscreenDialog: true,
-            builder: (context) {
-              return const Home();
-            },
-          ));
+        context,
+        MaterialPageRoute(builder: (context) {
+          return const Home();
+        }),
+      );
     });
   }
 }

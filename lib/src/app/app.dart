@@ -9,10 +9,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Brick',
-      routes: routes,
+      // routes: routes,
       theme: BrickTheme.basic,
       darkTheme: BrickTheme.dark,
       debugShowCheckedModeBanner: false,
+      home: const Splash(),
     );
   }
 }

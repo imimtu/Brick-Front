@@ -1,4 +1,5 @@
 import 'package:brick/src/app/pages/home/home.dart';
+import 'package:brick/src/app/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -36,16 +37,25 @@ class _SplashState extends State<Splash> {
     );
   }
 
+  // TODO: [💡] 앱 진입 전 처리해야할 일들은 여기서 진행!
   /// Splash 화면 빌드 후에 동작할 함수
   Future<void> _afterBuild() async {
-    Future.delayed(const Duration(seconds: 2, milliseconds: 200), () {
+    // TODO: 인가된 사용자 인지 확인 후 화면 전환
+    Widget nextPage = const Login();
+
+    bool isAuthorized = false;
+
+    if (isAuthorized) {
+      nextPage = const Home();
+    }
+
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pop(context);
 
-      // TODO: 인증 로직 이후 화면 전환
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return const Home();
+          return nextPage;
         }),
       );
     });

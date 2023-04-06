@@ -1,9 +1,8 @@
+library brick.configs.local_storage;
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum LocalStorageKey {
-  token,
-  refreshToken,
-}
+part 'local_storage_enums.dart';
 
 class LocalStorageConfig {
   LocalStorageConfig._();

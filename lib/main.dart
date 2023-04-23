@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:brick/src/config/env/env_enums.dart';
 import 'package:brick/src/config/error/error_enums.dart';
 import 'package:brick/src/config/error/error_messages.dart';
@@ -16,12 +18,19 @@ void main() async {
 
   await setEnv();
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: ((context) => BrickProvider())),
-    ],
-    child: const App(),
-  ));
+  runZonedGuarded(
+    () {
+      runApp(MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: ((context) => BrickProvider())),
+        ],
+        child: const App(),
+      ));
+    },
+    (error, stack) {
+      BrickLogger().error(msg: "$error");
+    },
+  );
 }
 
 /// Set Flutter Error Detecting

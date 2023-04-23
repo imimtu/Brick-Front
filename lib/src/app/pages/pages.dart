@@ -7,7 +7,7 @@ import 'package:brick/src/app/pages/splash/splash.dart';
 import 'package:brick/src/app/pages/brick_detail/brick_detail.dart';
 
 export 'home/home.dart';
-export 'home/home_controller.dart';
+export '../providers/brick_provider.dart';
 export 'splash/splash.dart';
 export 'brick_detail/brick_detail.dart';
 

@@ -9,7 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import 'package:brick/src/app/app.dart';
-import 'package:brick/src/app/pages/home/home_controller.dart';
+import 'package:brick/src/app/providers/brick_provider.dart';
 
 void main() async {
   setErrorDetector();
@@ -18,7 +18,7 @@ void main() async {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: ((context) => HomeController())),
+      ChangeNotifierProvider(create: ((context) => BrickProvider())),
     ],
     child: const App(),
   ));

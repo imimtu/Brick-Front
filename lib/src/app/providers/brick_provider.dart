@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:brick/src/domain/models/brick.dart';
 
-class HomeController with ChangeNotifier, DiagnosticableTreeMixin {
+class BrickProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<Brick> brickList = [];
 
   void addItem({required String title, String? contents}) {

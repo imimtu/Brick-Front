@@ -1,5 +1,6 @@
 import 'package:brick/src/app/pages/home/home.dart';
 import 'package:brick/src/app/pages/login/login.dart';
+import 'package:brick/src/app/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -19,15 +20,26 @@ class _SplashState extends State<Splash> {
       _afterBuild();
     });
 
-    return const Scaffold(
-      backgroundColor: Colors.black,
+    Color scaffoldColor = BrickColors.white;
+    Color textColor = BrickColors.black;
+
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
+    if (isDarkMode) {
+      scaffoldColor = BrickColors.black;
+      textColor = BrickColors.white;
+    }
+
+    return Scaffold(
+      backgroundColor: scaffoldColor,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Text(
             "BRICK",
             style: TextStyle(
-              color: Colors.white,
+              color: textColor,
               fontSize: 24,
             ),
             textAlign: TextAlign.center,

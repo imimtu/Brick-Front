@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
+  static String path = "/home";
+
   const Home({super.key});
 
   @override
@@ -57,7 +59,7 @@ class _HomeState extends State<Home> {
           },
         );
       }),
-      title: const Text("Brick"),
+      title: const Text("BRICK"),
     );
   }
 

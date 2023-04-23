@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       theme: BrickTheme.basic,
       darkTheme: BrickTheme.dark,
       debugShowCheckedModeBanner: false,
+      home: const Splash(),
     );
   }
 }

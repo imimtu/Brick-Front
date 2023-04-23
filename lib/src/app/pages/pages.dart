@@ -1,3 +1,5 @@
+import 'package:brick/src/app/pages/login/login.dart';
+import 'package:brick/src/app/pages/signup/signup.dart';
 import 'package:flutter/material.dart';
 
 import 'package:brick/src/app/pages/home/home.dart';
@@ -9,26 +11,20 @@ export 'home/home_controller.dart';
 export 'splash/splash.dart';
 export 'brick_detail/brick_detail.dart';
 
-enum PATH {
-  splash,
-  home,
-  brickDetail,
-}
-
-const Map<PATH, String> path = {
-  PATH.splash: "/splash",
-  PATH.home: "/",
-  PATH.brickDetail: "/brick",
-};
-
 Map<String, Widget Function(BuildContext)> routes = {
-  path[PATH.splash]!: (context) {
+  Splash.path: (context) {
     return const Splash();
   },
-  path[PATH.home]!: (context) {
+  Login.path: (context) {
+    return const Login();
+  },
+  SignUp.path: (context) {
+    return const SignUp();
+  },
+  Home.path: (context) {
     return const Home();
   },
-  path[PATH.brickDetail]!: (context) {
+  BrickDetail.path: (context) {
     return const BrickDetail();
   }
 };

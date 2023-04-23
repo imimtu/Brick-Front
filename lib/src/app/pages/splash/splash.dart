@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
         child: Padding(
           padding: EdgeInsets.all(10.0),
           child: Text(
-            "Brick.\nYour growth partner.",
+            "BRICK",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,

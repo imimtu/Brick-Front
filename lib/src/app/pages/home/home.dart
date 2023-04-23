@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
           },
         );
       }),
-      title: const Text("Brick"),
+      title: const Text("BRICK"),
     );
   }
 

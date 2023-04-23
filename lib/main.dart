@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:brick/src/app/app.dart';
 import 'package:brick/src/config/env/env_enums.dart';
 import 'package:brick/src/config/error/error_enums.dart';
 import 'package:brick/src/config/error/error_messages.dart';
@@ -8,11 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:provider/provider.dart';
-
-import 'package:brick/src/app/app.dart';
-import 'package:brick/src/app/providers/brick_provider.dart';
-
 void main() async {
   setErrorDetector();
 
@@ -20,12 +16,7 @@ void main() async {
 
   runZonedGuarded(
     () {
-      runApp(MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: ((context) => BrickProvider())),
-        ],
-        child: const App(),
-      ));
+      runApp(const App());
     },
     (error, stack) {
       BrickLogger().error(msg: "$error");

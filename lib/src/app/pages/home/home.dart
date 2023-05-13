@@ -1,3 +1,4 @@
+import 'package:brick/src/app/providers/auth_provider.dart';
 import 'package:brick/src/domain/models/brick.dart';
 import 'package:brick/src/app/providers/brick_provider.dart';
 import 'package:brick/src/app/widgets/widgets.dart';
@@ -81,7 +82,15 @@ class _HomeState extends State<Home> {
           ListTile(
             title: const Text("Menu2"),
             onTap: () {},
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Provider.of<AuthProvider>(context, listen: false).logout();
+            },
+            child: Row(
+              children: const [Icon(Icons.logout), Text("로그아웃")],
+            ),
+          ),
         ],
       ),
     );

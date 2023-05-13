@@ -1,9 +1,13 @@
-import 'package:brick/src/app/pages/pages.dart';
+import 'package:brick/src/app/pages/home/home.dart';
 import 'package:brick/src/app/pages/signup/signup.dart';
+import 'package:brick/src/app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
-  static String path = "/login";
+  static const String path = "/auth/login";
+  static const String name = "login";
 
   const Login({super.key});
 
@@ -21,13 +25,17 @@ class _LoginState extends State<Login> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Home.path);
+                  Provider.of<AuthProvider>(context, listen: false)
+                      .login()
+                      .then((value) {
+                    context.go(Home.path);
+                  });
                 },
                 child: const Text("Login"),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, SignUp.path);
+                  context.go(SignUp.path);
                 },
                 child: const Text("회원가입"),
               ),

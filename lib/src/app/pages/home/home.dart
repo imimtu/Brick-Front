@@ -1,12 +1,13 @@
+import 'package:brick/src/app/providers/auth_provider.dart';
 import 'package:brick/src/domain/models/brick.dart';
-import 'package:brick/src/app/pages/home/home_controller.dart';
-import 'package:brick/src/app/pages/pages.dart';
+import 'package:brick/src/app/providers/brick_provider.dart';
 import 'package:brick/src/app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  static String path = "/home";
+  static const String path = "/home";
+  static const String name = "home";
 
   const Home({super.key});
 
@@ -81,7 +82,15 @@ class _HomeState extends State<Home> {
           ListTile(
             title: const Text("Menu2"),
             onTap: () {},
-          )
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Provider.of<AuthProvider>(context, listen: false).logout();
+            },
+            child: Row(
+              children: const [Icon(Icons.logout), Text("로그아웃")],
+            ),
+          ),
         ],
       ),
     );
@@ -98,29 +107,27 @@ class _HomeState extends State<Home> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  itemCount: context.watch<HomeController>().brickList.length,
-                  itemBuilder: (context, index) {
-                    return Builder(
-                      builder: (context) {
-                        Brick brick =
-                            context.watch<HomeController>().brickList[index];
+                child: Consumer<BrickProvider>(
+                  builder: (context, provider, child) {
+                    return ListView.builder(
+                      itemCount: provider.brickList.length,
+                      itemBuilder: (context, index) {
+                        return Builder(
+                          builder: (context) {
+                            Brick brick = provider.brickList[index];
 
-                        return BrickTile(
-                          isChecked: brick.isCompleted,
-                          checkOnChnaged: (val) {
-                            if (val != null) {
-                              brick.isCompleted = val;
-                              // context
-                              //     .read<HomeController>()
-                              //     .changeComplteState(index: index, val: val);
-                            }
-                          },
-                          title: brick.title,
-                          onDelete: () {
-                            context
-                                .read<HomeController>()
-                                .deleteItem(index: index);
+                            return BrickTile(
+                              isChecked: brick.isCompleted,
+                              checkOnChnaged: (val) {
+                                if (val != null) {
+                                  brick.isCompleted = val;
+                                }
+                              },
+                              title: brick.title,
+                              onDelete: () {
+                                provider.deleteItem(index: index);
+                              },
+                            );
                           },
                         );
                       },
@@ -201,7 +208,7 @@ class _HomeState extends State<Home> {
   }
 
   void _addToDo(String val) {
-    context.read<HomeController>().addItem(title: val);
+    context.read<BrickProvider>().addItem(title: val);
     textEditingController.text = "";
   }
 }

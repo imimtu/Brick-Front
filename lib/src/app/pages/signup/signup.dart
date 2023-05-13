@@ -1,8 +1,10 @@
-import 'package:brick/src/app/pages/pages.dart';
+import 'package:brick/src/app/pages/login/login.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUp extends StatefulWidget {
-  static String path = "/signup";
+  static const String path = "/auth/signup";
+  static const String name = "signup";
 
   const SignUp({super.key});
 
@@ -20,7 +22,7 @@ class _SignUpState extends State<SignUp> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Home.path);
+                  context.go(Login.path);
                 },
                 child: const Text("회원가입"),
               ),

@@ -1,12 +1,12 @@
 import 'package:brick/src/domain/models/brick.dart';
 import 'package:brick/src/app/providers/brick_provider.dart';
-import 'package:brick/src/app/pages/pages.dart';
 import 'package:brick/src/app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  static String path = "/home";
+  static const String path = "/home";
+  static const String name = "home";
 
   const Home({super.key});
 

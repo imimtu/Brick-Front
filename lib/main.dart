@@ -16,7 +16,7 @@ void main() async {
 
   runZonedGuarded(
     () {
-      runApp(const App());
+      runApp(App());
     },
     (error, stack) {
       BrickLogger().error(msg: "$error");

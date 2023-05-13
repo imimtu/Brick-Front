@@ -1,10 +1,14 @@
+import 'package:brick/src/app/app.dart';
 import 'package:brick/src/app/pages/home/home.dart';
-import 'package:brick/src/app/pages/login/login.dart';
 import 'package:brick/src/app/styles/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Splash extends StatefulWidget {
-  static String path = "/splash";
+  static const String path = "/";
+  static const String name = "splash";
+
+  static bool isSplashRunned = false;
 
   const Splash({super.key});
 
@@ -37,7 +41,7 @@ class _SplashState extends State<Splash> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Text(
-            "BRICK",
+            App.title,
             style: TextStyle(
               color: textColor,
               fontSize: 24,
@@ -49,27 +53,18 @@ class _SplashState extends State<Splash> {
     );
   }
 
-  // TODO: [💡] 앱 진입 전 처리해야할 일들은 여기서 진행!
-  /// Splash 화면 빌드 후에 동작할 함수
   Future<void> _afterBuild() async {
-    // TODO: 인가된 사용자 인지 확인 후 화면 전환
-    Widget nextPage = const Login();
+    await _showSplash().then((value) {
+      // TODO: 자동 로그인 로직 후 화면 이동
 
-    bool isAuthorized = false;
+      context.go(Home.path);
+    });
+  }
 
-    if (isAuthorized) {
-      nextPage = const Home();
-    }
-
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pop(context);
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) {
-          return nextPage;
-        }),
-      );
+  Future<bool> _showSplash() {
+    return Future.delayed(const Duration(seconds: 2, milliseconds: 100), () {
+      Splash.isSplashRunned = true;
+      return Splash.isSplashRunned;
     });
   }
 }

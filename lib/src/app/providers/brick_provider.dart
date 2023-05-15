@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:brick/src/domain/models/brick.dart';
+import 'package:brick/src/domain/brick/models/brick.dart';
 
 class BrickProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<Brick> brickList = [];

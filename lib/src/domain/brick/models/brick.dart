@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'hashtag.dart';
+import '../../hashtag/repositories/hashtag.dart';
 import 'package:just_util/just_util.dart';
 
 /// Brick(ToDo) Entity

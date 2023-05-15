@@ -1,5 +1,7 @@
-import 'package:brick/src/domain/models/models.dart';
-import 'package:brick/src/domain/repositories/brick_repository.dart';
+import 'package:brick/src/domain/brick/models/brick.dart';
+import 'package:brick/src/domain/helpers/api_result.dart';
+import 'package:brick/src/domain/user/models/user.dart';
+import 'package:brick/src/domain/brick/repositories/brick_repository.dart';
 
 class BrickUsecases {
   final BrickRepository _remoteRepository;
@@ -11,13 +13,13 @@ class BrickUsecases {
   })  : _remoteRepository = remoteRepository,
         _localRepository = localRepository;
 
-  Future<Result<List<Brick>>> allBricks(User user) async {
+  Future<ApiResult<List<Brick>>> allBricks(User user) async {
     try {
       // TODO(kangmin): 모든 Brick 데이터 가져오는 로직 생성
 
-      return Result(true);
+      return ApiResult(true);
     } catch (e) {
-      return Result(false, error: Errors.unexpected, msg: e.toString());
+      return ApiResult(false, error: ApiErrors.unexpected, msg: e.toString());
     }
   }
 }

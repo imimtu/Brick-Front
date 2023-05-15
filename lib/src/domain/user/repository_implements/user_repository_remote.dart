@@ -1,5 +1,5 @@
-import 'package:brick/src/domain/models/user.dart';
-import 'package:brick/src/domain/repositories/user_repository.dart';
+import 'package:brick/src/domain/user/models/user.dart';
+import 'package:brick/src/domain/user/repositories/user_repository.dart';
 
 class UserRepositoryRemote implements UserRepository {
   @override

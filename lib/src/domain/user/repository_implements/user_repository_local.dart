@@ -1,27 +1,27 @@
-import 'package:brick/src/domain/models/brick.dart';
-import 'package:brick/src/domain/repositories/brick_repository.dart';
+import 'package:brick/src/domain/user/models/user.dart';
+import 'package:brick/src/domain/user/repositories/user_repository.dart';
 
-class BrickRepositoryLocal implements BrickRepository {
+class UserRepositoryLocal implements UserRepository {
   @override
-  Future create(Brick brick) {
+  Future create(User user) {
     // TODO: implement create
     throw UnimplementedError();
   }
 
   @override
-  Future delete(Brick brick) {
+  Future delete(User user) {
     // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
-  Future read(Brick brick) {
+  Future read(User user) {
     // TODO: implement read
     throw UnimplementedError();
   }
 
   @override
-  Future update(Brick brick) {
+  Future update(User user) {
     // TODO: implement update
     throw UnimplementedError();
   }

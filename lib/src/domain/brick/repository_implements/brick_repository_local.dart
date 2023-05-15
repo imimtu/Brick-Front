@@ -1,7 +1,7 @@
-import 'package:brick/src/domain/models/brick.dart';
-import 'package:brick/src/domain/repositories/brick_repository.dart';
+import 'package:brick/src/domain/brick/models/brick.dart';
+import 'package:brick/src/domain/brick/repositories/brick_repository.dart';
 
-class BrickRepositoryRemote implements BrickRepository {
+class BrickRepositoryLocal implements BrickRepository {
   @override
   Future create(Brick brick) {
     // TODO: implement create

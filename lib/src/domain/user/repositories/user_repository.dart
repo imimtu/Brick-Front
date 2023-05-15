@@ -1,4 +1,4 @@
-import '../models/models.dart';
+import 'package:brick/src/domain/user/models/user.dart';
 
 abstract class UserRepository {
   Future create(User user);

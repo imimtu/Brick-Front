@@ -1,5 +1,5 @@
 import 'package:brick/src/app/providers/auth_provider.dart';
-import 'package:brick/src/domain/models/brick.dart';
+import 'package:brick/src/domain/brick/models/brick.dart';
 import 'package:brick/src/app/providers/brick_provider.dart';
 import 'package:brick/src/app/widgets/widgets.dart';
 import 'package:flutter/material.dart';

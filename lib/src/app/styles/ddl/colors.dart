@@ -5,6 +5,8 @@ abstract class BrickColors {
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
   static const Color black = Color.fromRGBO(0, 0, 0, 1);
   static const Color blue = Color.fromRGBO(90, 140, 225, 1);
+  static const Color red = Color.fromRGBO(225, 90, 90, 1);
+  static const Color green = Color.fromRGBO(100, 170, 115, 1);
 
   // White to Black
   static const Color white100 = Color.fromRGBO(215, 215, 215, 1);

@@ -8,7 +8,7 @@ part 'appbar_theme.dart';
 ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     brightness: Brightness.dark,
-    seedColor: BrickColors.black,
+    seedColor: BrickColors.white,
   ),
   textTheme: BrickTextStyles.darkTextTheme,
 );

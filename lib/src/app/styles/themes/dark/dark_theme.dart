@@ -6,5 +6,9 @@ import 'package:flutter/material.dart';
 part 'appbar_theme.dart';
 
 ThemeData darkTheme = ThemeData(
-  appBarTheme: darkAppbarTheme,
+  colorScheme: ColorScheme.fromSeed(
+    brightness: Brightness.dark,
+    seedColor: BrickColors.black,
+  ),
+  textTheme: BrickTextStyles.darkTextTheme,
 );

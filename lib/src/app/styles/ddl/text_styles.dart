@@ -9,7 +9,8 @@ enum FontType {
 /// Brick TextStyles
 abstract class BrickTextStyles {
   /// FontTheme
-  static const TextTheme basicTextTheme = Typography.blackCupertino;
+  static const TextTheme basicTextTheme = Typography.whiteCupertino;
+  static const TextTheme darkTextTheme = Typography.blackCupertino;
 
   /// FontWeights
   static const FontWeight _bold = FontWeight.w700;

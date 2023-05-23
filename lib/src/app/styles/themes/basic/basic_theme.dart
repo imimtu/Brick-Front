@@ -7,5 +7,9 @@ part 'appbar_theme.dart';
 part 'elevated_button_theme.dart';
 
 ThemeData basicTheme = ThemeData(
-  appBarTheme: basicAppbarTheme,
+  colorScheme: ColorScheme.fromSeed(
+    brightness: Brightness.light,
+    seedColor: BrickColors.white,
+  ),
+  textTheme: BrickTextStyles.basicTextTheme,
 );

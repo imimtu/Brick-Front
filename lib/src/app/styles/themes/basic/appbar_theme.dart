@@ -1,12 +1,11 @@
 part of brick.styles.theme.basic;
 
-AppBarTheme basicAppbarTheme = AppBarTheme(
+AppBarTheme basicAppbarTheme = const AppBarTheme(
   color: BrickColors.white,
-  titleTextStyle: BrickTextStyles.title.copyWith(color: BrickColors.black),
-  actionsIconTheme: const IconThemeData(
+  actionsIconTheme: IconThemeData(
     color: Colors.black,
   ),
-  iconTheme: const IconThemeData(
+  iconTheme: IconThemeData(
     color: Colors.black,
   ),
 );

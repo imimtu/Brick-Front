@@ -12,4 +12,6 @@ ThemeData basicTheme = ThemeData(
     seedColor: BrickColors.white,
   ),
   textTheme: BrickTextStyles.textTheme,
+  appBarTheme: basicAppbarTheme,
+  elevatedButtonTheme: basicElevatedButtonTheme,
 );

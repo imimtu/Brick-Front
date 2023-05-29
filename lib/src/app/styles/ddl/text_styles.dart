@@ -30,11 +30,7 @@ enum FontWeightType {
 
 /// Brick TextStyles
 abstract class BrickTextStyles {
-  /// FontTheme
-  static const TextTheme basicTextTheme = Typography.blackCupertino;
-  static const TextTheme darkTextTheme = Typography.whiteCupertino;
-
-  static final TextStyle _baseTextStyle = GoogleFonts.getFont('Noto Sans KR');
+  static final TextStyle _textStyle = GoogleFonts.getFont('Noto Sans');
 
   /// FontWeights
   static const FontWeight _bold = FontWeight.w700;
@@ -43,77 +39,91 @@ abstract class BrickTextStyles {
 
   /// Fonts
   // Display
-  static const TextStyle _displayLarge = TextStyle(
+  static final TextStyle _displayLarge = _textStyle.copyWith(
     fontSize: 60,
     fontWeight: _regular,
   );
-  static const TextStyle _displayMedium = TextStyle(
+  static final TextStyle _displayMedium = _textStyle.copyWith(
     fontSize: 56,
     fontWeight: _regular,
   );
-  static const TextStyle _displaySmall = TextStyle(
+  static final TextStyle _displaySmall = _textStyle.copyWith(
     fontSize: 52,
     fontWeight: _regular,
   );
 
-  // Display
-  static const TextStyle _headlineLarge = TextStyle(
+  // headline
+  static final TextStyle _headlineLarge = _textStyle.copyWith(
     fontSize: 48,
     fontWeight: _regular,
   );
-  static const TextStyle _headlineMedium = TextStyle(
+  static final TextStyle _headlineMedium = _textStyle.copyWith(
     fontSize: 44,
     fontWeight: _regular,
   );
-  static const TextStyle _headlineSmall = TextStyle(
+  static final TextStyle _headlineSmall = _textStyle.copyWith(
     fontSize: 40,
     fontWeight: _regular,
   );
 
   // Title
-  static const TextStyle _titleLarge = TextStyle(
+  static final TextStyle _titleLarge = _textStyle.copyWith(
     fontSize: 36,
     fontWeight: _regular,
   );
-  static const TextStyle _titleMedium = TextStyle(
+  static final TextStyle _titleMedium = _textStyle.copyWith(
     fontSize: 24,
     fontWeight: _regular,
   );
-  static const TextStyle _titleSmall = TextStyle(
+  static final TextStyle _titleSmall = _textStyle.copyWith(
     fontSize: 20,
     fontWeight: _regular,
   );
 
   // Body
-  static const TextStyle _bodyLarge = TextStyle(
+  static final TextStyle _bodyLarge = _textStyle.copyWith(
     fontSize: 18,
     fontWeight: _regular,
   );
-  static const TextStyle _bodyMedium = TextStyle(
+  static final TextStyle _bodyMedium = _textStyle.copyWith(
     fontSize: 16,
     fontWeight: _regular,
   );
-  static const TextStyle _bodySmall = TextStyle(
+  static final TextStyle _bodySmall = _textStyle.copyWith(
     fontSize: 14,
     fontWeight: _regular,
   );
 
   // Label
-  static const TextStyle _labelLarge = TextStyle(
+  static final TextStyle _labelLarge = _textStyle.copyWith(
     fontSize: 12,
     fontWeight: _regular,
   );
-  static const TextStyle _labelMedium = TextStyle(
+  static final TextStyle _labelMedium = _textStyle.copyWith(
     fontSize: 10,
     fontWeight: _regular,
   );
-  static const TextStyle _labelSmall = TextStyle(
+  static final TextStyle _labelSmall = _textStyle.copyWith(
     fontSize: 8,
     fontWeight: _regular,
   );
 
   static TextTheme textTheme = TextTheme(
     displayLarge: _displayLarge,
+    displayMedium: _displayMedium,
+    displaySmall: _displaySmall,
+    headlineLarge: _headlineLarge,
+    headlineMedium: _headlineMedium,
+    headlineSmall: _headlineSmall,
+    titleLarge: _titleLarge,
+    titleMedium: _titleMedium,
+    titleSmall: _titleSmall,
+    bodyLarge: _bodyLarge,
+    bodyMedium: _bodyMedium,
+    bodySmall: _bodySmall,
+    labelLarge: _labelLarge,
+    labelMedium: _labelMedium,
+    labelSmall: _labelSmall,
   );
 
   static TextStyle _fontTypeTranslator({required FontType fontType}) {

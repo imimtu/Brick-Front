@@ -30,7 +30,14 @@ enum FontWeightType {
 
 /// Brick TextStyles
 abstract class BrickTextStyles {
-  static final TextStyle _textStyle = GoogleFonts.getFont('Noto Sans');
+  /// Default Font Family
+  static const String _fontFamily = 'Noto Sans';
+
+  /// Default TextStyle
+  static final TextStyle _textStyle = GoogleFonts.getFont(_fontFamily);
+
+  /// Default Text Theme
+  static final TextTheme textTheme = GoogleFonts.getTextTheme(_fontFamily);
 
   /// FontWeights
   static const FontWeight _bold = FontWeight.w700;
@@ -108,7 +115,8 @@ abstract class BrickTextStyles {
     fontWeight: _regular,
   );
 
-  static TextTheme textTheme = TextTheme(
+  /// Custom Text Theme
+  static TextTheme theme = TextTheme(
     displayLarge: _displayLarge,
     displayMedium: _displayMedium,
     displaySmall: _displaySmall,

@@ -10,5 +10,5 @@ ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     seedColor: BrickColors.white,
   ),
-  textTheme: BrickTextStyles.darkTextTheme,
+  textTheme: BrickTextStyles.textTheme,
 );

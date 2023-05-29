@@ -34,6 +34,8 @@ abstract class BrickTextStyles {
   static const TextTheme basicTextTheme = Typography.blackCupertino;
   static const TextTheme darkTextTheme = Typography.whiteCupertino;
 
+  static final TextStyle _baseTextStyle = GoogleFonts.getFont('Noto Sans KR');
+
   /// FontWeights
   static const FontWeight _bold = FontWeight.w700;
   static const FontWeight _medium = FontWeight.w500;
@@ -108,6 +110,10 @@ abstract class BrickTextStyles {
   static const TextStyle _labelSmall = TextStyle(
     fontSize: 8,
     fontWeight: _regular,
+  );
+
+  static TextTheme textTheme = TextTheme(
+    displayLarge: _displayLarge,
   );
 
   static TextStyle _fontTypeTranslator({required FontType fontType}) {

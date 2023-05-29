@@ -11,5 +11,5 @@ ThemeData basicTheme = ThemeData(
     brightness: Brightness.light,
     seedColor: BrickColors.white,
   ),
-  textTheme: BrickTextStyles.basicTextTheme,
+  textTheme: BrickTextStyles.textTheme,
 );

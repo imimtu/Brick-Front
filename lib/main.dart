@@ -9,13 +9,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() async {
-  setErrorDetector();
-
-  await setEnv();
-
+void main() {
   runZonedGuarded(
-    () {
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      setErrorDetector();
+
+      await setEnv();
+
       runApp(const App());
     },
     (error, stack) {

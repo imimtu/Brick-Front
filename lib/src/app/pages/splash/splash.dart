@@ -42,10 +42,10 @@ class _SplashState extends State<Splash> {
           padding: const EdgeInsets.all(10.0),
           child: Text(
             App.title,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 24,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(color: textColor),
             textAlign: TextAlign.center,
           ),
         ),

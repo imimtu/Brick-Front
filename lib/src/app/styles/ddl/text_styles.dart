@@ -31,7 +31,7 @@ enum FontWeightType {
 /// Brick TextStyles
 abstract class BrickTextStyles {
   /// Default Font Family
-  static const String _fontFamily = 'Noto Sans';
+  static const String _fontFamily = 'Noto Serif';
 
   /// Default TextStyle
   static final TextStyle _textStyle = GoogleFonts.getFont(_fontFamily);

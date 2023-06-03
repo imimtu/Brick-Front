@@ -1,69 +1,49 @@
-// ignore_for_file: non_constant_identifier_names
+library brick.config.api;
 
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import './api_enums.dart';
+import 'package:brick/src/util/brick_logger.dart';
 import 'package:http/http.dart' as http;
+import 'package:just_util/just_util.dart';
+
+part 'api_routes.dart';
+part 'api_headers.dart';
 
 class APIConfig {
-  APIConfig._();
-
   static final APIConfig _instance = APIConfig._();
 
-  APIHost? host;
-  Duration timeLimit = const Duration(seconds: 8);
-  FutureOr<http.Response> Function()? onTimeout;
-  FutureOr<String> Function()? onTimeoutAtRead;
-  FutureOr<Uint8List> Function()? onTimeoutAtReadBytes;
-
-  // [todo] : API URL 생성 완료 시 주소 확정 시키기
-  final Map<APIHost, String> _hostMap = {
-    APIHost.beta: "http://",
-    APIHost.release: "https://",
-    APIHost.kangmin: "http://192.168.0.4",
-  };
-
-  /// Routes String
-  final Map<APIRoutes, String> _routesMap = {
-    APIRoutes.login: "/login",
-    APIRoutes.todolist: "/todolist",
-  };
-
-  final Map<APIHeader, Map<String, String>> _headerMap = {
-    APIHeader.cors: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Request-Headers": "*",
-      "Access-Control-Resqust-Method": "*",
-    },
-    APIHeader.chrome: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Request-Headers": "*",
-      "Access-Control-Resqust-Method": "DELETE,GET,OPTIONS,PATCH,POST,PUT",
-      "content-type": "application/json",
-    },
-    APIHeader.json: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Request-Headers": "*",
-      "Access-Control-Resqust-Method": "*",
-      "content-type": "application/json",
-    },
-    APIHeader.image: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Request-Headers": "*",
-      "Access-Control-Resqust-Method": "*",
-      "content-type": "image/jpeg",
-    },
-  };
+  APIConfig._() {
+    BrickLogger().info(
+      msg: "[APIConfig] Created",
+      block: "Singleton Constructor",
+    );
+  }
 
   factory APIConfig() {
     return _instance;
   }
 
+  /// API 요청 Domain 경로
+  String? host;
+
+  /// API 요청처리 대기 시간
+  /// - Default : 8초
+  Duration timeLimit = const Duration(seconds: 8);
+
+  /// API Timeout 시 실행될 함수
+  FutureOr<http.Response> Function()? onTimeout;
+
+  /// READ 요청에 대해 Timeout 시 실행될 함수
+  FutureOr<String> Function()? onTimeoutAtRead;
+
+  /// READ BYTES 요청에 대해 Timeout 시 실행될 함수
+  FutureOr<Uint8List> Function()? onTimeoutAtReadBytes;
+
   // Initialize API Configs
   void init({
-    APIHost? host,
+    String? host,
     Duration? timeout,
     FutureOr<http.Response> Function()? onTimeout,
     FutureOr<String> Function()? onTimeoutAtRead,
@@ -78,17 +58,34 @@ class APIConfig {
           onTimeoutAtReadAsBytes ?? _instance.onTimeoutAtReadBytes;
   }
 
+  /// API 요청에 대한 로그 생성
+  void _logRequest({
+    required String method,
+    required String uri,
+  }) {
+    String timeStamp = DateTime.now().toYYYYMMDDHHMMSS();
+
+    String msg = '$timeStamp [$method] $uri';
+
+    BrickLogger().msg(
+      msg: msg,
+      block: 'API REUQEST',
+    );
+  }
+
   /// Request with [http.get] Method
   Future<http.Response> sendGet({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'GET', uri: uri.toString());
 
     http.Response response = await http
         .get(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
         )
         .timeout(
           _instance.timeLimit,
@@ -100,17 +97,19 @@ class APIConfig {
 
   /// Request with [http.post] Method
   Future<http.Response> sendPost({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'POST', uri: uri.toString());
 
     http.Response response = await http
         .post(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
           body: body,
           encoding: encoding,
         )
@@ -124,17 +123,19 @@ class APIConfig {
 
   /// Request with [http.put] Method
   Future<http.Response> sendPut({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'PUT', uri: uri.toString());
 
     http.Response response = await http
         .put(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
           body: body,
           encoding: encoding,
         )
@@ -148,17 +149,19 @@ class APIConfig {
 
   /// Request with [http.delete] Method
   Future<http.Response> sendDelete({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'DELETE', uri: uri.toString());
 
     http.Response response = await http
         .delete(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
           body: body,
           encoding: encoding,
         )
@@ -172,17 +175,19 @@ class APIConfig {
 
   /// Request with [http.patch] Method
   Future<http.Response> sendPatch({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'PATCH', uri: uri.toString());
 
     http.Response response = await http
         .patch(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
           body: body,
           encoding: encoding,
         )
@@ -196,17 +201,19 @@ class APIConfig {
 
   /// Request with [http.read] Method
   Future<String> sendRead({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'READ', uri: uri.toString());
 
     String response = await http
         .read(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
         )
         .timeout(
           _instance.timeLimit,
@@ -218,17 +225,19 @@ class APIConfig {
 
   /// Request with [http.readAsBytes] Method
   Future<Uint8List> sendReadBytes({
-    required APIRoutes routes,
-    APIHeader? headers,
+    required String routes,
+    Map<String, String>? headers,
     Object? body,
     Encoding? encoding,
   }) async {
-    Uri uri = Uri.parse(_hostMap[_instance.host!]! + _routesMap[routes]!);
+    Uri uri = Uri.parse(_instance.host! + routes);
+
+    _logRequest(method: 'READ_BYTES', uri: uri.toString());
 
     Uint8List response = await http
         .readBytes(
           uri,
-          headers: headers != null ? _headerMap[headers] : null,
+          headers: headers,
         )
         .timeout(
           _instance.timeLimit,

@@ -1,3 +1,5 @@
+part of brick.config.env;
+
 /// - 현재 빌드 타겟 모드
 /// - **.env 결정을 위한 enum 값
 enum EnvTarget {

@@ -49,6 +49,8 @@ class APIConfig {
     FutureOr<String> Function()? onTimeoutAtRead,
     FutureOr<Uint8List> Function()? onTimeoutAtReadAsBytes,
   }) {
+    BrickLogger().info(msg: 'host : $host', block: 'API Config');
+
     _instance
       ..host = host ?? _instance.host
       ..timeLimit = timeout ?? _instance.timeLimit

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:brick/src/app/app.dart';
+import 'package:brick/src/config/api/api_config.dart';
 import 'package:brick/src/config/env/env_config.dart';
 import 'package:brick/src/util/brick_logger.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +14,13 @@ void main() {
 
       setErrorDetector();
 
-      EnvConfig().init();
+      // Env Setting
+      EnvConfig envConfig = EnvConfig();
+      envConfig.init();
+
+      // API Setting
+      APIConfig apiConfig = APIConfig();
+      apiConfig.init(host: envConfig.getValue(envKey: EnvKey.apiUrl));
 
       runApp(const App());
     },

@@ -48,4 +48,9 @@ class EnvConfig {
       throw Exception(ErrorMessages().env(envError: EnvError.missingFile));
     }
   }
+
+  /// .env 파일에 명시된 값을 가져옵니다
+  String getValue({required EnvKey envKey}) {
+    return dotenv.get(envKey.toUpperCamelCase());
+  }
 }

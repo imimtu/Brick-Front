@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:brick/src/config/api/api_config.dart';
+import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
 import 'package:brick/src/util/brick_logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:just_util/just_util.dart';

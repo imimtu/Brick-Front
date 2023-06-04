@@ -1,14 +1,8 @@
 library brick.config.api;
 
-import 'dart:async';
-
 import 'package:brick/src/util/brick_logger.dart';
 
 part 'api_routes.dart';
-part 'api_headers.dart';
-part 'api_result.dart';
-part 'api_errors.dart';
-part 'api_requester/api_requester.dart';
 
 class APIConfig {
   static final APIConfig _instance = APIConfig._();

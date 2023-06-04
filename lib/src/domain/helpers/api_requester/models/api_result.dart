@@ -1,4 +1,4 @@
-part of brick.config.api;
+part of brick.domain.helpers.api_requester;
 
 /// Response Value Object
 ///

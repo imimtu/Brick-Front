@@ -1,4 +1,4 @@
-part of brick.config.api;
+part of brick.domain.helpers.api_requester;
 
 abstract class APIHeader {
   /// cors 허용 헤더

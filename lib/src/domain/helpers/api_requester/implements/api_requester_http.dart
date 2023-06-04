@@ -9,10 +9,15 @@ import 'package:just_util/just_util.dart';
 class APIRequesterHTTP extends APIRequester {
   /// API 요청처리 대기 시간
   /// - Default : 8초
-  Duration timeLimit = const Duration(seconds: 8);
+  final Duration timeLimit;
 
   /// API Timeout 시 실행될 함수
   FutureOr<http.Response> Function()? onTimeout;
+
+  APIRequesterHTTP({
+    this.timeLimit = const Duration(seconds: 8),
+    this.onTimeout,
+  });
 
   /// API 요청에 대한 로그 생성
   void _logRequest({

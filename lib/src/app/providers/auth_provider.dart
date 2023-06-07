@@ -14,4 +14,9 @@ class AuthProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future signUp({
+    required String userId,
+    required String userPassword,
+  }) async {}
 }

@@ -1,6 +1,9 @@
 import 'package:brick/src/app/pages/login/login.dart';
+import 'package:brick/src/app/providers/auth_provider.dart';
+import 'package:brick/src/util/brick_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   static const String path = "/auth/signup";
@@ -13,20 +16,151 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController emailTextCtrl = TextEditingController();
+  final TextEditingController passwordTextCtrl = TextEditingController();
+  final TextEditingController passwordReenterTextCtrl = TextEditingController();
+
+  bool _passwordObscure = true;
+  bool _passwordReenterObscrue = true;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  context.go(Login.path);
-                },
-                child: const Text("회원가입"),
-              ),
-            ],
+    double bodyWidth = 300;
+
+    double gapUnit = 8;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("회원가입"),
+      ),
+      body: Center(
+        child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          key: _formKey,
+          child: Container(
+            width: bodyWidth,
+            padding: EdgeInsets.all(gapUnit),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // 이메일
+                TextFormField(
+                  controller: emailTextCtrl,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: "이메일",
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(),
+                  ),
+                  onFieldSubmitted: (value) {
+                    BrickLogger()
+                        .info(msg: 'email - onFieldSubmitted // $value');
+                  },
+                  validator: (value) {
+                    if (value == null || value == '') {
+                      return '이메일을 입력해주세요.';
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: gapUnit * 2),
+
+                // 비밀번호
+                TextFormField(
+                  controller: passwordTextCtrl,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: _passwordObscure,
+                  decoration: InputDecoration(
+                      labelText: "비밀번호",
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _passwordObscure = !_passwordObscure;
+                          });
+                        },
+                        icon: _passwordObscure
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                      )),
+                  onFieldSubmitted: (value) {
+                    BrickLogger()
+                        .info(msg: 'password - onFieldSubmitted // $value');
+                  },
+                  validator: (value) {
+                    if (value == null || value == '') {
+                      return '비밀번호를 입력해주세요.';
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: gapUnit * 3),
+
+                // 비밀번호 재입력
+                TextFormField(
+                  controller: passwordReenterTextCtrl,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: _passwordReenterObscrue,
+                  decoration: InputDecoration(
+                    labelText: "비밀번호 재입력",
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _passwordReenterObscrue = !_passwordReenterObscrue;
+                        });
+                      },
+                      icon: _passwordReenterObscrue
+                          ? const Icon(Icons.visibility)
+                          : const Icon(Icons.visibility_off),
+                    ),
+                  ),
+                  onFieldSubmitted: (value) {
+                    BrickLogger()
+                        .info(msg: 'password - onFieldSubmitted // $value');
+                  },
+                  validator: (value) {
+                    if (value == null || value == '') {
+                      return '비밀번호를 다시 입력해주세요.';
+                    }
+
+                    if (value != passwordTextCtrl.text) {
+                      return "입력하신 비밀번호화 일치하지 않습니다.";
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: gapUnit * 6),
+
+                SizedBox(
+                  width: bodyWidth,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Provider.of<AuthProvider>(context, listen: false)
+                            .signUp(
+                          userId: emailTextCtrl.text,
+                          userPassword: passwordTextCtrl.text,
+                        )
+                            .then((value) {
+                          context.goNamed(Login.name);
+                        });
+                      }
+                    },
+                    child: const Text("회원가입"),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

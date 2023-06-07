@@ -16,7 +16,7 @@ void main() {
 
       // Env Setting
       EnvConfig envConfig = EnvConfig();
-      envConfig.init();
+      await envConfig.init();
 
       // API Setting
       APIConfig apiConfig = APIConfig();

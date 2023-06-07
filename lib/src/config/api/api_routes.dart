@@ -1,5 +1,10 @@
 part of brick.config.api;
 
 abstract class APIRoutes {
-  static const String login = "/login";
+  /// Base Routes
+  static const String baseRouteV1 = "/api/v1";
+
+  /// Auth
+  static const String login = "$baseRouteV1/login"; // [POST] 로그인
+  static const String join = "$baseRouteV1/join"; // [POST] 회원 가입
 }

@@ -195,14 +195,30 @@ class _SignUpState extends State<SignUp> {
                   width: bodyWidth,
                   child: Row(
                     children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
+                      SizedBox(
+                        height: BrickSize.buttonHeight,
+                        child: Ink(
+                          decoration: const ShapeDecoration(
+                            color: BrickColors.black,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                BrickSize.radius / 2,
+                              ),
+                            )),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: BrickColors.white,
+                            ),
+                            onPressed: () {
+                              context.pop();
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          context.pop();
-                        },
                       ),
+                      const SizedBox(width: BrickSize.marginSide),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {

@@ -2,6 +2,7 @@ import 'package:brick/src/app/app.dart';
 import 'package:brick/src/app/pages/login/login.dart';
 import 'package:brick/src/app/providers/auth_provider.dart';
 import 'package:brick/src/app/styles/styles.dart';
+import 'package:brick/src/app/widgets/button/elevated_icon_button.dart';
 import 'package:brick/src/util/brick_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -195,27 +196,14 @@ class _SignUpState extends State<SignUp> {
                   width: bodyWidth,
                   child: Row(
                     children: [
-                      SizedBox(
+                      ElevatedIconButton(
                         height: BrickSize.buttonHeight,
-                        child: Ink(
-                          decoration: const ShapeDecoration(
-                            color: BrickColors.black,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                              Radius.circular(
-                                BrickSize.radius / 2,
-                              ),
-                            )),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new_rounded,
-                              color: BrickColors.white,
-                            ),
-                            onPressed: () {
-                              context.pop();
-                            },
-                          ),
+                        onPressed: () {
+                          context.pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: BrickColors.white,
                         ),
                       ),
                       const SizedBox(width: BrickSize.marginSide),

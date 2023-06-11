@@ -65,6 +65,40 @@ class _LoginState extends State<Login> {
                     height: gapUnit * 4,
                   ),
 
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: BrickColors.black,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: BrickSize.marginSide * 2,
+                          right: BrickSize.marginSide * 2,
+                        ),
+                        child: Text(
+                          "로그인",
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: textColor,
+                                  ),
+                        ),
+                      ),
+                      const Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: BrickColors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: gapUnit * 4,
+                  ),
+
                   // 이메일
                   TextFormField(
                     controller: emailTextCtrl,

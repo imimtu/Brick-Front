@@ -1,9 +1,10 @@
 /// Entity Interface to communicate with server.
 abstract class EntityInterface {
-  /// check response is error;
-  set isError(bool value);
+  bool isError;
 
-  bool get isError;
+  EntityInterface({
+    this.isError = false,
+  });
 
   Map<String, dynamic> toJson();
 

@@ -2,9 +2,6 @@ import 'package:brick/src/domain/helpers/entity_interface.dart';
 import 'package:just_util/just_util.dart';
 
 class UserEntity extends EntityInterface {
-  @override
-  bool isError;
-
   int? id;
   String? userId;
   String userPassword;
@@ -26,7 +23,7 @@ class UserEntity extends EntityInterface {
   String? username;
 
   UserEntity({
-    this.isError = false,
+    super.isError = false,
     this.id,
     this.userId,
     required this.userPassword,

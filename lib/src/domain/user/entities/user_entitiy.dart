@@ -1,7 +1,7 @@
-import 'package:brick/src/domain/helpers/entity_interface.dart';
+import 'package:brick/src/domain/helpers/mixins/json_mixin.dart';
 import 'package:just_util/just_util.dart';
 
-class UserEntity extends EntityInterface {
+class UserEntity with JsonMixin {
   int? id;
   String? userId;
   String userPassword;
@@ -23,7 +23,6 @@ class UserEntity extends EntityInterface {
   String? username;
 
   UserEntity({
-    super.isError = false,
     this.id,
     this.userId,
     required this.userPassword,

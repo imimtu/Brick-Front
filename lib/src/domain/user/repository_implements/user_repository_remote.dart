@@ -1,17 +1,17 @@
-import 'package:brick/src/domain/user/entities/signIn/sign_in_entity_req.dart';
-import 'package:brick/src/domain/user/entities/signUp/sign_up_entity_req.dart';
+import 'package:brick/src/domain/user/entities/login/login_entity_req.dart';
+import 'package:brick/src/domain/user/entities/join/join_entity_req.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 import 'package:brick/src/domain/user/repositories/user_repository.dart';
 
 class UserRepositoryRemote implements UserRepository {
   @override
-  Future signUp(SignUpEntityReq user) {
-    // TODO: implement create
+  Future join(JoinEntityReq user) {
+    // TODO: implement read
     throw UnimplementedError();
   }
 
   @override
-  Future signIn(SigninEntityReq user) {
+  Future login(LoginEntityReq user) {
     // TODO: implement read
     throw UnimplementedError();
   }

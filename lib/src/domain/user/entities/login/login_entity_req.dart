@@ -1,11 +1,11 @@
 import 'package:brick/src/domain/helpers/entitiy_helper/entity_interface_request.dart';
 import 'package:just_util/just_util.dart';
 
-class SigninEntityReq extends EntityInterfaceRequest {
+class LoginEntityReq extends EntityInterfaceRequest {
   String email;
   String userPassword;
 
-  SigninEntityReq({
+  LoginEntityReq({
     required this.email,
     required this.userPassword,
   });

@@ -4,10 +4,10 @@ import 'package:brick/src/domain/user/models/user.dart';
 
 abstract class UserRepository {
   /// 회원 가입
-  Future join(JoinEntityReq user);
+  Future join(JoinEntityReq joinEntityReq);
 
   /// 로그인
-  Future login(LoginEntityReq user);
+  Future login(LoginEntityReq loginEntityReq);
 
   /// User 정보 조회
   Future read(User user);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
 import 'package:brick/src/domain/user/entities/join/join_entity_req.dart';
 import 'package:brick/src/domain/user/entities/user_entitiy.dart';
@@ -14,6 +16,7 @@ class UserUsecase {
   });
 
   // TODO: UserEntity를 바로 넘기는 것이 아닌, 에러 여부와 에러 내용까지 모두 포함 할 수 있는 Value Object가 필요.
+  // JoinEntityRes 정도가 좋을 듯 하다.
   Future<UserEntity> join({
     required String email,
     required String userPassword,
@@ -26,7 +29,9 @@ class UserUsecase {
     APIResult<http.Response> result =
         await remoteRepository.join(joinEntityReq);
 
-    UserEntity userEntity = UserEntity.fromJson({});
+    var resJson = jsonDecode(result.response!.body);
+
+    UserEntity userEntity = UserEntity.fromJson(resJson);
 
     return userEntity;
   }

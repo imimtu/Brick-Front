@@ -24,6 +24,8 @@ class _LoginState extends State<Login> {
   final TextEditingController emailTextCtrl = TextEditingController();
   final TextEditingController passwordTextCtrl = TextEditingController();
 
+  bool _passwordObscrue = true;
+
   @override
   Widget build(BuildContext context) {
     double bodyWidth = 300;
@@ -126,10 +128,21 @@ class _LoginState extends State<Login> {
                   TextFormField(
                     controller: passwordTextCtrl,
                     keyboardType: TextInputType.visiblePassword,
-                    decoration: const InputDecoration(
+                    obscureText: _passwordObscrue,
+                    decoration: InputDecoration(
                       labelText: "비밀번호",
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _passwordObscrue = !_passwordObscrue;
+                          });
+                        },
+                        icon: _passwordObscrue
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                      ),
                     ),
                     onFieldSubmitted: (value) {
                       BrickLogger()
@@ -155,7 +168,15 @@ class _LoginState extends State<Login> {
                           userPassword: passwordTextCtrl.text,
                         )
                             .then((value) {
-                          context.go(Home.path);
+                          if (value != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(value.errorMessage),
+                              ),
+                            );
+                          } else {
+                            // context.go(Home.path);
+                          }
                         });
                       },
                       child: const Text("로그인"),

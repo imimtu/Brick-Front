@@ -217,7 +217,15 @@ class _SignUpState extends State<SignUp> {
                                 userPassword: passwordTextCtrl.text,
                               )
                                   .then((value) {
-                                context.goNamed(Login.name);
+                                if (value != null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(value.errorMessage),
+                                    ),
+                                  );
+                                } else {
+                                  context.goNamed(Login.name);
+                                }
                               });
                             }
                           },

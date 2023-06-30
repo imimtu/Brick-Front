@@ -1,5 +1,4 @@
 import 'package:brick/src/app/app.dart';
-import 'package:brick/src/app/pages/home/home.dart';
 import 'package:brick/src/app/pages/signup/signup.dart';
 import 'package:brick/src/app/providers/auth_provider.dart';
 import 'package:brick/src/app/styles/ddl/ddl.dart';
@@ -174,8 +173,6 @@ class _LoginState extends State<Login> {
                                 content: Text(value.errorMessage),
                               ),
                             );
-                          } else {
-                            // context.go(Home.path);
                           }
                         });
                       },

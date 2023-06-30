@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
+import 'package:brick/src/domain/helpers/entitiy_helper/request_entity.dart';
+import 'package:brick/src/domain/helpers/entitiy_helper/response_entity.dart';
+import 'package:brick/src/domain/helpers/error_helper/brick_error.dart';
 import 'package:brick/src/domain/user/entities/join/join_entity_req.dart';
 import 'package:brick/src/domain/user/entities/user_entitiy.dart';
 import 'package:brick/src/domain/user/repositories/user_repository.dart';
@@ -15,24 +18,44 @@ class UserUsecase {
     required this.localRepository,
   });
 
-  // TODO: UserEntity를 바로 넘기는 것이 아닌, 에러 여부와 에러 내용까지 모두 포함 할 수 있는 Value Object가 필요.
   // JoinEntityRes 정도가 좋을 듯 하다.
-  Future<UserEntity> join({
-    required String email,
-    required String userPassword,
+  Future<ResponseEntity<UserEntity>> join({
+    required JoinRequestValue joinRequestValue,
   }) async {
-    JoinEntityReq joinEntityReq = JoinEntityReq(
-      email: email,
-      userPassword: userPassword,
-    );
+    ResponseEntity<UserEntity> responseEntity;
 
-    APIResult<http.Response> result =
-        await remoteRepository.join(joinEntityReq);
+    try {
+      RequestEntity<JoinRequestValue> requestEntity =
+          RequestEntity<JoinRequestValue>(
+        value: joinRequestValue,
+      );
 
-    var resJson = jsonDecode(result.response!.body);
+      APIResult<http.Response> result = await remoteRepository
+          .join(requestEntity) as APIResult<http.Response>;
 
-    UserEntity userEntity = UserEntity.fromJson(resJson);
+      if (result.success) {
+        var resJson = jsonDecode(result.response!.body);
 
-    return userEntity;
+        UserEntity userEntity = UserEntity.fromJson(resJson);
+
+        responseEntity = ResponseEntity(isError: false, value: userEntity);
+      } else {
+        BrickError brickError = BrickError(
+          errorMessage: result.error.toString(),
+          errorParameters: joinRequestValue.toJson(),
+        );
+
+        responseEntity = ResponseEntity(isError: true, brickError: brickError);
+      }
+    } catch (error) {
+      BrickError brickError = BrickError(
+        errorMessage: error.toString(),
+        errorParameters: joinRequestValue.toJson(),
+      );
+
+      responseEntity = ResponseEntity(isError: true, brickError: brickError);
+    }
+
+    return responseEntity;
   }
 }

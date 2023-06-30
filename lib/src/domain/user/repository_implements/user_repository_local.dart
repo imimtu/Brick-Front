@@ -1,3 +1,5 @@
+import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
+import 'package:brick/src/domain/helpers/entitiy_helper/request_entity.dart';
 import 'package:brick/src/domain/user/entities/login/login_entity_req.dart';
 import 'package:brick/src/domain/user/entities/join/join_entity_req.dart';
 import 'package:brick/src/domain/user/models/user.dart';
@@ -5,7 +7,9 @@ import 'package:brick/src/domain/user/repositories/user_repository.dart';
 
 class UserRepositoryLocal implements UserRepository {
   @override
-  Future join(JoinEntityReq user) {
+  Future<APIResult> join(
+    RequestEntity<JoinRequestValue> requestEntity,
+  ) {
     // TODO: implement create
     throw UnimplementedError();
   }

@@ -1,4 +1,4 @@
 /// Entity Interface for server or DB requests.
-abstract class EntityInterfaceRequest {
+abstract class RequestValueInterface {
   Map<String, dynamic> toJson();
 }

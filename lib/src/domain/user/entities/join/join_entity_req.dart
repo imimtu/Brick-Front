@@ -1,11 +1,11 @@
-import 'package:brick/src/domain/helpers/entitiy_helper/entity_interface_request.dart';
+import 'package:brick/src/domain/helpers/entitiy_helper/interfaces/request_value_interface.dart';
 import 'package:just_util/just_util.dart';
 
-class JoinEntityReq extends EntityInterfaceRequest {
+class JoinRequestValue extends RequestValueInterface {
   String email;
   String userPassword;
 
-  JoinEntityReq({
+  JoinRequestValue({
     required this.email,
     required this.userPassword,
   });

@@ -31,7 +31,7 @@ class AuthProvider extends ChangeNotifier {
     required String userPassword,
   }) async {
     LoginRequestValue loginRequestValue = LoginRequestValue(
-      email: email,
+      userId: email,
       userPassword: userPassword,
     );
 
@@ -80,7 +80,7 @@ class AuthProvider extends ChangeNotifier {
     required String userPassword,
   }) async {
     JoinRequestValue joinRequestValue =
-        JoinRequestValue(email: email, userPassword: userPassword);
+        JoinRequestValue(userId: email, userPassword: userPassword);
 
     BrickError? brickError;
 

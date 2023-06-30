@@ -2,11 +2,11 @@ import 'package:brick/src/domain/helpers/entitiy_helper/interfaces/request_value
 import 'package:just_util/just_util.dart';
 
 class LoginRequestValue extends RequestValueInterface {
-  String email;
+  String userId;
   String userPassword;
 
   LoginRequestValue({
-    required this.email,
+    required this.userId,
     required this.userPassword,
   });
 
@@ -14,7 +14,7 @@ class LoginRequestValue extends RequestValueInterface {
   JustJson toJson() {
     JustJson json = {};
 
-    json.setIfPresent(key: "email", val: email);
+    json.setIfPresent(key: "userId", val: userId);
     json.setIfPresent(key: "userPassword", val: userPassword);
 
     return json;

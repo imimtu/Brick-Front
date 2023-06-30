@@ -87,8 +87,8 @@ class _HomeState extends State<Home> {
             onPressed: () {
               Provider.of<AuthProvider>(context, listen: false).logout();
             },
-            child: Row(
-              children: const [Icon(Icons.logout), Text("로그아웃")],
+            child: const Row(
+              children: [Icon(Icons.logout), Text("로그아웃")],
             ),
           ),
         ],

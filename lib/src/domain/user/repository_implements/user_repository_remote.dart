@@ -2,7 +2,7 @@ import 'package:brick/src/config/api/api_config.dart';
 import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
 import 'package:brick/src/domain/helpers/api_requester/implements/api_requester_http.dart';
 import 'package:brick/src/domain/helpers/entitiy_helper/request_entity.dart';
-import 'package:brick/src/domain/user/entities/login/login_entity_req.dart';
+import 'package:brick/src/domain/user/entities/login/login_request_value.dart';
 import 'package:brick/src/domain/user/entities/join/join_request_value.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 import 'package:brick/src/domain/user/repositories/user_repository.dart';
@@ -25,11 +25,12 @@ class UserRepositoryRemote implements UserRepository {
   }
 
   @override
-  Future<APIResult<http.Response>> login(LoginEntityReq loginEntityReq) async {
+  Future<APIResult<http.Response>> login(
+      RequestEntity<LoginRequestValue> requestEntity) async {
     String apiPath = APIConfig().host! + APIRoutes.login;
     APIResult<http.Response> response = await apiRequesterHTTP.post(
       uri: apiPath,
-      body: loginEntityReq.toJson(),
+      body: requestEntity.params,
     );
 
     return response;

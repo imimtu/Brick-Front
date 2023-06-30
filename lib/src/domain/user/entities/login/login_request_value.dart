@@ -1,11 +1,11 @@
 import 'package:brick/src/domain/helpers/entitiy_helper/interfaces/request_value_interface.dart';
 import 'package:just_util/just_util.dart';
 
-class LoginEntityReq extends RequestValueInterface {
+class LoginRequestValue extends RequestValueInterface {
   String email;
   String userPassword;
 
-  LoginEntityReq({
+  LoginRequestValue({
     required this.email,
     required this.userPassword,
   });

@@ -1,5 +1,5 @@
 import 'package:brick/src/domain/helpers/entitiy_helper/response_entity.dart';
-import 'package:brick/src/domain/user/entities/join/join_entity_req.dart';
+import 'package:brick/src/domain/user/entities/join/join_request_value.dart';
 import 'package:brick/src/domain/user/entities/user_entitiy.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 import 'package:brick/src/domain/user/repository_implements/user_repository_local.dart';

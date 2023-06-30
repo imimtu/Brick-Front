@@ -212,8 +212,8 @@ class _SignUpState extends State<SignUp> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               Provider.of<AuthProvider>(context, listen: false)
-                                  .signUp(
-                                userId: emailTextCtrl.text,
+                                  .join(
+                                email: emailTextCtrl.text,
                                 userPassword: passwordTextCtrl.text,
                               )
                                   .then((value) {

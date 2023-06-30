@@ -1,5 +1,7 @@
 import 'package:brick/src/domain/helpers/entitiy_helper/response_entity.dart';
+import 'package:brick/src/domain/helpers/error_helper/brick_error.dart';
 import 'package:brick/src/domain/user/entities/join/join_request_value.dart';
+import 'package:brick/src/domain/user/entities/login/login_request_value.dart';
 import 'package:brick/src/domain/user/entities/user_entitiy.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 import 'package:brick/src/domain/user/repository_implements/user_repository_local.dart';
@@ -24,13 +26,47 @@ class AuthProvider extends ChangeNotifier {
     );
   }
 
-  Future login({
+  Future<BrickError?> login({
     required String email,
     required String userPassword,
   }) async {
-    isLogined = true;
+    LoginRequestValue loginRequestValue = LoginRequestValue(
+      email: email,
+      userPassword: userPassword,
+    );
 
-    notifyListeners();
+    BrickError? brickError;
+
+    try {
+      ResponseEntity responseEntity = await usecase.login(
+        loginRequestValue: loginRequestValue,
+      );
+
+      if (responseEntity.isError) {
+        brickError = responseEntity.brickError;
+      } else {
+        UserEntity userEntity = responseEntity.value as UserEntity;
+
+        isLogined = true;
+
+        user = User(
+          id: userEntity.userId ?? "",
+          name: userEntity.username ?? "",
+          nickName: userEntity.nickName ?? "",
+          email: email,
+          phoneNumber: userEntity.phoneNumber ?? "",
+        );
+
+        notifyListeners();
+      }
+    } catch (error) {
+      brickError = BrickError(
+        errorMessage: error.toString(),
+        errorParameters: loginRequestValue.toJson(),
+      );
+    }
+
+    return brickError;
   }
 
   Future logout() async {
@@ -39,31 +75,30 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ResponseEntity<User>> join({
+  Future<BrickError?> join({
     required String email,
     required String userPassword,
   }) async {
     JoinRequestValue joinRequestValue =
         JoinRequestValue(email: email, userPassword: userPassword);
 
-    ResponseEntity<UserEntity> responseEntity = await usecase.join(
-      joinRequestValue: joinRequestValue,
-    );
+    BrickError? brickError;
 
-    UserEntity userEntity = responseEntity.value as UserEntity;
+    try {
+      ResponseEntity<UserEntity> responseEntity = await usecase.join(
+        joinRequestValue: joinRequestValue,
+      );
 
-    User user = User(
-      id: userEntity.userId ?? "",
-      name: userEntity.username ?? "",
-      nickName: userEntity.nickName ?? "",
-      email: email,
-      phoneNumber: userEntity.phoneNumber ?? "",
-    );
+      if (responseEntity.isError) {
+        brickError = responseEntity.brickError;
+      }
+    } catch (error) {
+      brickError = BrickError(
+        errorMessage: error.toString(),
+        errorParameters: joinRequestValue.toJson(),
+      );
+    }
 
-    return ResponseEntity(
-      isError: responseEntity.isError,
-      brickError: responseEntity.brickError,
-      value: user,
-    );
+    return brickError;
   }
 }

@@ -150,7 +150,10 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton(
                       onPressed: () {
                         Provider.of<AuthProvider>(context, listen: false)
-                            .login()
+                            .login(
+                          email: emailTextCtrl.text,
+                          userPassword: passwordTextCtrl.text,
+                        )
                             .then((value) {
                           context.go(Home.path);
                         });

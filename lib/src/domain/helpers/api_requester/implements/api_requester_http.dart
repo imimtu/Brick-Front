@@ -6,6 +6,9 @@ import 'package:brick/src/util/brick_logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:just_util/just_util.dart';
 
+const String _resultCode = "resultCode";
+const String _result = "result";
+
 class APIRequesterHTTP extends APIRequester {
   /// API 요청처리 대기 시간
   /// - Default : 8초
@@ -40,17 +43,20 @@ class APIRequesterHTTP extends APIRequester {
     APIResult<http.Response> apiResult;
 
     if (response.body.isEmpty) {
-      APIErrors apiErrors = APIErrors.noResult;
+      APIErrors apiErrors = APIErrors.NO_RESULT;
       apiResult = APIResult(false, error: apiErrors, response: response);
     } else {
       Map<String, dynamic> body = jsonDecode(response.body);
 
-      if (body.containsKey('resultCode') && body['resultCode'] == 'SUCCESS') {
+      if (body.containsKey(_resultCode) && body[_resultCode] == 'SUCCESS') {
         apiResult = APIResult(true, response: response);
       } else {
+        APIErrors apiErrors = apiErrorsFromResultCode(body[_resultCode]);
+
         apiResult = APIResult(
           false,
-          msg: "[${body['resultCode']}] ${body['result'] ?? ''}",
+          error: apiErrors,
+          msg: apiErrors.toMsg(),
           response: response,
         );
       }

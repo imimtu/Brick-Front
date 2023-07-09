@@ -81,8 +81,12 @@ class UserUsecase {
 
         responseEntity = ResponseEntity(isError: false, value: userEntity);
       } else {
+        String errMsg = "";
+        errMsg += result.error != null ? "[${result.error?.name}] " : '';
+        errMsg += result.msg ?? "";
+
         BrickError brickError = BrickError(
-          errorMessage: result.msg ?? result.error.toString(),
+          errorMessage: errMsg == '' ? "" : errMsg,
           errorParameters: loginRequestValue.toJson(),
         );
 

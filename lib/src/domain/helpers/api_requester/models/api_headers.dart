@@ -13,7 +13,7 @@ abstract class APIHeader {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Request-Headers": "*",
     "Access-Control-Resqust-Method": "DELETE,GET,OPTIONS,PATCH,POST,PUT",
-    "content-type": "application/json",
+    "Content-Type": "application/json",
   };
 
   /// json 전송 헤더
@@ -21,7 +21,7 @@ abstract class APIHeader {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Request-Headers": "*",
     "Access-Control-Resqust-Method": "*",
-    "content-type": "application/json",
+    "Content-Type": "application/json",
   };
 
   /// image 전송 헤더
@@ -29,6 +29,6 @@ abstract class APIHeader {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Request-Headers": "*",
     "Access-Control-Resqust-Method": "*",
-    "content-type": "image/jpeg",
+    "Content-Type": "image/jpeg",
   };
 }

@@ -82,7 +82,7 @@ class UserUsecase {
         responseEntity = ResponseEntity(isError: false, value: userEntity);
       } else {
         BrickError brickError = BrickError(
-          errorMessage: result.error.toString(),
+          errorMessage: result.msg ?? result.error.toString(),
           errorParameters: loginRequestValue.toJson(),
         );
 

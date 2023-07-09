@@ -17,6 +17,7 @@ class UserRepositoryRemote implements UserRepository {
   ) async {
     String apiPath = APIConfig().host! + APIRoutes.join;
     APIResult<http.Response> response = await apiRequesterHTTP.post(
+      headers: APIHeader.json,
       uri: apiPath,
       body: requestEntity.params,
     );
@@ -29,6 +30,7 @@ class UserRepositoryRemote implements UserRepository {
       RequestEntity<LoginRequestValue> requestEntity) async {
     String apiPath = APIConfig().host! + APIRoutes.login;
     APIResult<http.Response> response = await apiRequesterHTTP.post(
+      headers: APIHeader.json,
       uri: apiPath,
       body: requestEntity.params,
     );

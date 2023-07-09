@@ -1,15 +1,11 @@
 import 'package:brick/src/domain/helpers/api_requester/api_requester.dart';
 import 'package:brick/src/domain/helpers/entitiy_helper/request_entity.dart';
-import 'package:brick/src/domain/user/entities/login/login_request_value.dart';
 import 'package:brick/src/domain/user/entities/join/join_request_value.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 
 abstract class UserRepository {
   /// 회원 가입
   Future<APIResult> join(RequestEntity<JoinRequestValue> requestEntity);
-
-  /// 로그인
-  Future<APIResult> login(RequestEntity<LoginRequestValue> loginEntityReq);
 
   /// User 정보 조회
   Future read(User user);

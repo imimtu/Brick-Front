@@ -1,7 +1,11 @@
+import 'package:brick/src/domain/auth/entities/token_entity.dart';
+import 'package:brick/src/domain/auth/repository_implements/auth_repository_local.dart';
+import 'package:brick/src/domain/auth/repository_implements/auth_repository_remote.dart';
+import 'package:brick/src/domain/auth/usecases/auth_usecase.dart';
 import 'package:brick/src/domain/helpers/entitiy_helper/response_entity.dart';
 import 'package:brick/src/domain/helpers/error_helper/brick_error.dart';
 import 'package:brick/src/domain/user/entities/join/join_request_value.dart';
-import 'package:brick/src/domain/user/entities/login/login_request_value.dart';
+import 'package:brick/src/domain/auth/entities/login/login_request_value.dart';
 import 'package:brick/src/domain/user/entities/user_entitiy.dart';
 import 'package:brick/src/domain/user/models/user.dart';
 import 'package:brick/src/domain/user/repository_implements/user_repository_local.dart';
@@ -10,19 +14,28 @@ import 'package:brick/src/domain/user/usecases/user_usecase.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthProvider extends ChangeNotifier {
-  late UserUsecase usecase;
+  late UserUsecase userUsecase;
+  late AuthUsecase authUsecase;
 
   bool isLogined = false;
 
   User? user;
+  TokenEntity tokenEntity = TokenEntity();
 
   AuthProvider() {
     UserRepositoryRemote userRepositoryRemote = UserRepositoryRemote();
     UserRepositoryLocal userRepositoryLocal = UserRepositoryLocal();
 
-    usecase = UserUsecase(
+    userUsecase = UserUsecase(
       remoteRepository: userRepositoryRemote,
       localRepository: userRepositoryLocal,
+    );
+
+    AuthRepositoryRemote authRepositoryRemote = AuthRepositoryRemote();
+    AuthRepositoryLocal authRepositoryLocal = AuthRepositoryLocal();
+    authUsecase = AuthUsecase(
+      remoteRepository: authRepositoryRemote,
+      localReposiotry: authRepositoryLocal,
     );
   }
 
@@ -38,24 +51,15 @@ class AuthProvider extends ChangeNotifier {
     BrickError? brickError;
 
     try {
-      ResponseEntity responseEntity = await usecase.login(
+      ResponseEntity<TokenEntity> responseEntity = await authUsecase.login(
         loginRequestValue: loginRequestValue,
       );
 
       if (responseEntity.isError) {
         brickError = responseEntity.brickError;
       } else {
-        UserEntity userEntity = responseEntity.value as UserEntity;
-
         isLogined = true;
-
-        user = User(
-          id: userEntity.userId ?? "",
-          name: userEntity.username ?? "",
-          nickName: userEntity.nickName ?? "",
-          email: email,
-          phoneNumber: userEntity.phoneNumber ?? "",
-        );
+        tokenEntity = responseEntity.value as TokenEntity;
 
         notifyListeners();
       }
@@ -71,6 +75,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future logout() async {
     isLogined = false;
+    tokenEntity = TokenEntity();
 
     notifyListeners();
   }
@@ -85,7 +90,7 @@ class AuthProvider extends ChangeNotifier {
     BrickError? brickError;
 
     try {
-      ResponseEntity<UserEntity> responseEntity = await usecase.join(
+      ResponseEntity<UserEntity> responseEntity = await userUsecase.join(
         joinRequestValue: joinRequestValue,
       );
 

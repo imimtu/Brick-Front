@@ -34,6 +34,31 @@ class APIRequesterHTTP extends APIRequester {
     );
   }
 
+  APIResult<http.Response> _checkResponse({
+    required http.Response response,
+  }) {
+    APIResult<http.Response> apiResult;
+
+    if (response.body.isEmpty) {
+      APIErrors apiErrors = APIErrors.noResult;
+      apiResult = APIResult(false, error: apiErrors, response: response);
+    } else {
+      Map<String, dynamic> body = jsonDecode(response.body);
+
+      if (body.containsKey('resultCode') && body['resultCode'] == 'SUCCESS') {
+        apiResult = APIResult(true, response: response);
+      } else {
+        apiResult = APIResult(
+          false,
+          msg: "[${body['resultCode']}] ${body['result'] ?? ''}",
+          response: response,
+        );
+      }
+    }
+
+    return apiResult;
+  }
+
   @override
   Future<APIResult<http.Response>> get({
     required String uri,
@@ -58,7 +83,7 @@ class APIRequesterHTTP extends APIRequester {
             onTimeout: onTimeout,
           );
 
-      apiResult = APIResult(true, response: response);
+      apiResult = _checkResponse(response: response);
 
       client.close();
     } catch (e) {
@@ -99,7 +124,7 @@ class APIRequesterHTTP extends APIRequester {
             onTimeout: onTimeout,
           );
 
-      apiResult = APIResult(true, response: response);
+      apiResult = _checkResponse(response: response);
 
       client.close();
     } catch (e) {
@@ -140,7 +165,7 @@ class APIRequesterHTTP extends APIRequester {
             onTimeout: onTimeout,
           );
 
-      apiResult = APIResult(true, response: response);
+      apiResult = _checkResponse(response: response);
 
       client.close();
     } catch (e) {
@@ -181,7 +206,7 @@ class APIRequesterHTTP extends APIRequester {
             onTimeout: onTimeout,
           );
 
-      apiResult = APIResult(true, response: response);
+      apiResult = _checkResponse(response: response);
 
       client.close();
     } catch (e) {

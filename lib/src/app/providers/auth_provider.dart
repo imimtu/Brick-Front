@@ -1,4 +1,5 @@
-import 'package:brick/src/domain/auth/entities/token_entity.dart';
+import 'package:brick/src/domain/auth/entities/token/token_entity.dart';
+import 'package:brick/src/domain/auth/entities/token/valid_token_request_value.dart';
 import 'package:brick/src/domain/auth/repository_implements/auth_repository_local.dart';
 import 'package:brick/src/domain/auth/repository_implements/auth_repository_remote.dart';
 import 'package:brick/src/domain/auth/usecases/auth_usecase.dart';
@@ -68,6 +69,26 @@ class AuthProvider extends ChangeNotifier {
         errorMessage: error.toString(),
         errorParameters: loginRequestValue.toJson(),
       );
+    }
+
+    return brickError;
+  }
+
+  Future<BrickError?> validateToken() async {
+    BrickError? brickError;
+
+    if (tokenEntity.token != null) {
+      ValidateTokenRequestValue validateTokenRequestValue =
+          ValidateTokenRequestValue(token: tokenEntity.token!);
+
+      ResponseEntity<bool> responseEntity = await authUsecase.validateToken(
+          validateTokenRequestValue: validateTokenRequestValue);
+
+      if (responseEntity.value != null) {
+        isLogined = responseEntity.value!;
+      }
+
+      notifyListeners();
     }
 
     return brickError;
